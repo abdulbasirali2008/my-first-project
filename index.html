@@ -398,6 +398,36 @@
             margin-top: 15px;
         }
 
+        /* Custom Notification Alert Styles */
+        .custom-alert-box {
+            background: #232f3e;
+            border-radius: 18px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            padding: 25px 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .custom-alert-btn {
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(255,87,34,0.4);
+            transition: all 0.2s ease;
+        }
+
+        .custom-alert-btn:active {
+            transform: scale(0.95);
+        }
+
         /* Auth Styles */
         .auth-tabs {
             display: flex;
@@ -725,6 +755,15 @@
         </div>
     </div>
 
+    <!-- Custom Liquid Alert Modal -->
+    <div class="modal-overlay" id="customAlertModal">
+        <div class="custom-alert-box">
+            <h3 class="liquid-text" style="font-size: 20px; margin: 0 0 10px 0;">SHOPPING BAZAR</h3>
+            <p class="liquid-text" style="font-size: 14px; margin: 0 0 15px 0;">Added to cart successful</p>
+            <button class="custom-alert-btn liquid-text" onclick="closeCustomAlert()">OK</button>
+        </div>
+    </div>
+
     <!-- Auth Modal -->
     <div class="modal-overlay" id="accountModal">
         <div class="modal-box">
@@ -835,7 +874,15 @@
         function addToCart(title, price, img) {
             cart.push({ title, price, img });
             updateCartUI();
-            alert("Product added to cart!");
+            showCustomAlert();
+        }
+
+        function showCustomAlert() {
+            document.getElementById('customAlertModal').style.display = 'flex';
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('customAlertModal').style.display = 'none';
         }
 
         function addToCartFromDetails() {
