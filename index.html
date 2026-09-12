@@ -18,7 +18,7 @@
         }
         header {
             background: #fff;
-            padding: 15px;
+            padding: 10px 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -28,40 +28,41 @@
             z-index: 100;
         }
         .logo-container {
-            font-size: 20px;
+            font-size: 17px;
             font-weight: bold;
             color: #ff5500;
             cursor: pointer;
+            white-space: nowrap;
         }
         .search-bar {
             flex: 1;
-            margin: 0 15px;
+            margin: 0 10px;
             position: relative;
         }
         .search-bar input {
             width: 100%;
-            padding: 8px 12px 8px 35px;
+            padding: 6px 10px 6px 30px;
             border: 1px solid #ddd;
             border-radius: 20px;
             outline: none;
-            font-size: 14px;
+            font-size: 13px;
         }
         .search-icon {
             position: absolute;
-            left: 10px;
+            left: 9px;
             top: 50%;
             transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             fill: #888;
         }
         .header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 8px;
         }
         .user-status, .cart-icon-btn {
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             color: #555;
             font-weight: bold;
@@ -69,7 +70,8 @@
             border: none;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
+            white-space: nowrap;
         }
         .top-shortcuts {
             display: flex;
@@ -268,11 +270,11 @@
     <div class="logo-container" onclick="resetFilter()">Shopping Bazar</div>
     <div class="search-bar">
         <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        <input type="text" id="searchInput" placeholder="Search in Shopping Bazar..." onkeyup="searchProducts()">
+        <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchProducts()">
     </div>
     <div class="header-right">
-        <button class="cart-icon-btn" onclick="openCartModal()">🛒 Cart (<span id="cart-count">0</span>)</button>
-        <div class="user-status" onclick="openAccountModal()">👤 Login</div>
+        <button class="cart-icon-btn" onclick="openCartModal()">🛒(<span id="cart-count">0</span>)</button>
+        <div class="user-status" onclick="openAccountModal()">👤Login</div>
     </div>
 </header>
 
@@ -297,12 +299,12 @@
 
 <div class="product-grid" id="product-grid">
     
-    <!-- Product 1 -->
+    <!-- Product 1 (Using Unsplash image placeholder to avoid broken image if local file is missing) -->
     <div class="card" data-category="mens-fashion" onclick="openMultiPhotoProduct(this)" 
-         data-images='["76248.jpg", "76249.jpg", "76250.jpg", "76251.jpg"]'
+         data-images='["https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500", "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500"]'
          data-title="Treko Premium Waffle Polo Shirt" 
          data-price="600">
-        <img src="76248.jpg" alt="Treko Polo Shirt">
+        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="Treko Polo Shirt">
         <h3>Treko Premium Waffle Polo Shirt</h3>
         <div class="price-row">
             <span class="price">Tk 600</span>
@@ -320,28 +322,6 @@
             <span class="rating"><span>★</span> 4.7 (310)</span>
         </div>
         <button class="add-btn" onclick="event.stopPropagation(); addToCart('Nike Running Sports Shoes', 3500);">Add to Cart</button>
-    </div>
-
-    <!-- Product 3 -->
-    <div class="card" data-category="electronics" onclick="openSinglePhotoProduct('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500', 'Wireless Bluetooth Headphones', 'Tk 2,200', 'Crystal clear sound with deep bass and long battery life.')">
-        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Headphones">
-        <h3>Wireless Bluetooth Headphones</h3>
-        <div class="price-row">
-            <span class="price">Tk 2,200</span>
-            <span class="rating"><span>★</span> 4.9 (120)</span>
-        </div>
-        <button class="add-btn" onclick="event.stopPropagation(); addToCart('Wireless Bluetooth Headphones', 2200);">Add to Cart</button>
-    </div>
-
-    <!-- Product 4 -->
-    <div class="card" data-category="mens-fashion" onclick="openSinglePhotoProduct('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500', 'Casual Cotton Solid T-Shirt', 'Tk 450', 'Comfortable 100% cotton breathable fabric for daily wear.')">
-        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500" alt="T-Shirt">
-        <h3>Casual Cotton Solid T-Shirt</h3>
-        <div class="price-row">
-            <span class="price">Tk 450</span>
-            <span class="rating"><span>★</span> 4.5 (85)</span>
-        </div>
-        <button class="add-btn" onclick="event.stopPropagation(); addToCart('Casual Cotton Solid T-Shirt', 450);">Add to Cart</button>
     </div>
 
 </div>
@@ -451,7 +431,7 @@
         if (cart.length === 0) {
             container.innerHTML = '<p style="color: #777; font-size: 14px;">Your cart is empty.</p>';
         } else {
-            cart.forEach((item, index) => {
+            cart.forEach((item) => {
                 total += item.price;
                 const row = document.createElement('div');
                 row.className = 'cart-item-row';
