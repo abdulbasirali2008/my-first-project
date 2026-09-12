@@ -13,7 +13,7 @@
             background-color: #f4f4f4;
         }
 
-        /* হেডার ও নেভিগেশন */
+        /* হেডার */
         header {
             background-color: #232f3e;
             color: white;
@@ -70,7 +70,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Liquid Wave / Glow Effect */
+        /* Liquid Wave Effect */
         .liquid-text {
             background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
             background-size: 400% 400%;
@@ -94,7 +94,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* অফার ব্যানার */
         .banner {
             background: linear-gradient(90deg, #ff9900, #ff5500);
             color: white;
@@ -104,7 +103,6 @@
             font-size: 18px;
         }
 
-        /* প্রোডাক্ট গ্রিড */
         .container {
             max-width: 1000px;
             margin: 30px auto;
@@ -117,7 +115,6 @@
             gap: 20px;
         }
 
-        /* প্রোডাক্ট কার্ড */
         .card {
             background: white;
             padding: 15px;
@@ -155,11 +152,7 @@
             width: 100%;
         }
 
-        .add-btn:hover {
-            background-color: #f7ca00;
-        }
-
-        /* 📱 Floating Pill Bottom Navigation Bar (আপনার ছবির ডিজাইনে) */
+        /* Bottom Nav */
         .bottom-nav-container {
             position: fixed;
             bottom: 15px;
@@ -189,7 +182,6 @@
             align-items: center;
             justify-content: center;
             color: #a0a0a0;
-            text-decoration: none;
             font-size: 11px;
             font-weight: 600;
             cursor: pointer;
@@ -207,7 +199,6 @@
             margin-bottom: 3px;
         }
 
-        /* Active/Selected Item Highlight */
         .nav-item.active {
             background: rgba(255, 255, 255, 0.15);
             color: #3b82f6;
@@ -217,7 +208,6 @@
             fill: #3b82f6;
         }
 
-        /* Cart Counter Badge inside Nav */
         .cart-badge {
             position: absolute;
             top: 4px;
@@ -230,7 +220,7 @@
             border-radius: 10px;
         }
 
-        /* অ্যাকাউন্ট লগইন মোডাল */
+        /* Auth Modal Styling */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -255,9 +245,23 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        .modal-box h3 {
-            margin-top: 0;
-            color: #232f3e;
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .auth-tab.active {
+            color: #ff9900;
+            border-bottom: 3px solid #ff9900;
         }
 
         .modal-box input {
@@ -296,12 +300,10 @@
 
     <header>
         <div class="logo">MY SHOPPING</div>
-        
         <div class="search-bar">
             <input type="text" placeholder="Search products...">
             <button>Search</button>
         </div>
-
         <div class="header-right">
             <div class="user-status" id="header-user" onclick="openAccountModal()">
                 👤 Login
@@ -316,51 +318,60 @@
     <div class="container">
         <h2>Featured Products</h2>
         <div class="product-grid">
-            
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
                 <h3>Smart Watch</h3>
                 <div class="price">৳ 1,500</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
                 <h3>Wireless Headphone</h3>
                 <div class="price">৳ 2,200</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" alt="USB Keyboard">
                 <h3>USB Keyboard</h3>
                 <div class="price">৳ 850</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
             <div class="card">
                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
                 <h3>Running Shoes</h3>
                 <div class="price">৳ 3,500</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
         </div>
     </div>
 
-    <!-- অ্যাকাউন্ট লগইন মোডাল (Pop-up) -->
+    <!-- Auth Modal -->
     <div class="modal-overlay" id="accountModal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeAccountModal()">&times;</span>
-            <h3 id="modal-title">Account Login</h3>
             
+            <!-- Tab System -->
+            <div class="auth-tabs" id="auth-tabs">
+                <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</div>
+                <div class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</div>
+            </div>
+
+            <!-- Login Form -->
             <div id="login-form">
-                <input type="text" id="username-input" placeholder="Enter your name">
-                <input type="tel" id="userphone-input" placeholder="Enter Mobile Number (017XXXXXXXX)">
-                <input type="password" placeholder="Password">
+                <input type="tel" id="login-phone" placeholder="Enter Mobile Number">
+                <input type="password" id="login-pass" placeholder="Password">
                 <button class="login-submit-btn" onclick="handleLogin()">Login</button>
             </div>
 
+            <!-- Sign Up Form -->
+            <div id="signup-form" style="display: none;">
+                <input type="text" id="signup-name" placeholder="Full Name">
+                <input type="tel" id="signup-phone" placeholder="Mobile Number">
+                <input type="password" id="signup-pass" placeholder="Create Password">
+                <button class="login-submit-btn" style="background:#28a745;" onclick="handleSignUp()">Sign Up</button>
+            </div>
+
+            <!-- Logged-in Profile View -->
             <div id="user-profile" style="display: none;">
                 <p style="font-size: 18px;">Welcome, <b id="display-name" class="liquid-text">User</b>!</p>
                 <p style="font-size: 14px; color: #555;">Phone: <span id="display-phone"></span></p>
@@ -369,29 +380,22 @@
         </div>
     </div>
 
-    <!-- 📱 Floating Pill Bottom Navigation Bar -->
+    <!-- Floating Bottom Navigation Bar -->
     <div class="bottom-nav-container">
         <div class="bottom-nav">
-            <!-- Home -->
             <div class="nav-item active" id="nav-home" onclick="setActiveNav('nav-home'); window.scrollTo(0, 0);">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span>Home</span>
             </div>
-            
-            <!-- Categories -->
             <div class="nav-item" id="nav-cat" onclick="setActiveNav('nav-cat'); alert('Categories coming soon!');">
                 <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
                 <span>Categories</span>
             </div>
-
-            <!-- Cart (ওপর থেকে নিচে আনা হয়েছে) -->
             <div class="nav-item" id="nav-cart" onclick="setActiveNav('nav-cart'); alert('Cart item list coming soon!');">
                 <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 <span class="cart-badge" id="cart-count">0</span>
                 <span>Cart</span>
             </div>
-
-            <!-- Account -->
             <div class="nav-item" id="nav-account" onclick="setActiveNav('nav-account'); openAccountModal();">
                 <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <span id="nav-account-text">Account</span>
@@ -401,7 +405,11 @@
 
     <script>
         let count = 0;
-        let currentUser = null;
+
+        // পেজ লোড হলেই স্বয়ংক্রিয়ভাবে সেভ থাকা অ্যাকাউন্ট চেক করবে
+        window.onload = function() {
+            checkAutoLogin();
+        };
 
         function addToCart() {
             count++;
@@ -409,13 +417,11 @@
             alert("Item added to cart!");
         }
 
-        /* Tab Switch Effect */
         function setActiveNav(elementId) {
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById(elementId).classList.add('active');
         }
 
-        /* অ্যাকাউন্ট মোডাল কন্ট্রোল */
         function openAccountModal() {
             document.getElementById('accountModal').style.display = 'flex';
         }
@@ -424,59 +430,108 @@
             document.getElementById('accountModal').style.display = 'none';
         }
 
-        /* লগইন লজিক */
+        // Tab Switching Logic
+        function switchAuthTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('tab-login').classList.add('active');
+                document.getElementById('tab-signup').classList.remove('active');
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('signup-form').style.display = 'none';
+            } else {
+                document.getElementById('tab-signup').classList.add('active');
+                document.getElementById('tab-login').classList.remove('active');
+                document.getElementById('signup-form').style.display = 'block';
+                document.getElementById('login-form').style.display = 'none';
+            }
+        }
+
+        // 1. Sign Up Logic
+        function handleSignUp() {
+            const name = document.getElementById('signup-name').value.trim();
+            const phone = document.getElementById('signup-phone').value.trim();
+            const pass = document.getElementById('signup-pass').value.trim();
+
+            if (!name || !phone || !pass) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            // Save user to LocalStorage database
+            const userData = { name: name, phone: phone, pass: pass };
+            localStorage.setItem("user_" + phone, JSON.stringify(userData));
+
+            alert("Account created successfully! Now please login.");
+            switchAuthTab('login');
+            document.getElementById('login-phone').value = phone;
+        }
+
+        // 2. Login Logic
         function handleLogin() {
-            const nameInput = document.getElementById('username-input').value;
-            const phoneInput = document.getElementById('userphone-input').value;
+            const phone = document.getElementById('login-phone').value.trim();
+            const pass = document.getElementById('login-pass').value.trim();
 
-            if (nameInput.trim() === "") {
-                alert("Please enter a valid name!");
+            const savedUser = localStorage.getItem("user_" + phone);
+
+            if (!savedUser) {
+                alert("No account found with this phone number! Please Sign Up first.");
                 return;
             }
 
-            if (phoneInput.trim() === "") {
-                alert("Please enter your mobile number!");
-                return;
-            }
+            const parsedUser = JSON.parse(savedUser);
 
-            currentUser = nameInput;
-            
-            // ইউজারের নাম Liquid Glow ইফেক্ট সহ আপডেট
+            if (parsedUser.pass === pass) {
+                // Save current session so user stays logged in
+                localStorage.setItem("session_user", JSON.stringify(parsedUser));
+                applyLoggedInUI(parsedUser.name, parsedUser.phone);
+                alert("Logged in successfully!");
+                closeAccountModal();
+            } else {
+                alert("Incorrect Password!");
+            }
+        }
+
+        // 3. Auto Login Check on Page Load
+        function checkAutoLogin() {
+            const activeSession = localStorage.getItem("session_user");
+            if (activeSession) {
+                const user = JSON.parse(activeSession);
+                applyLoggedInUI(user.name, user.phone);
+            }
+        }
+
+        // Update UI after Login
+        function applyLoggedInUI(name, phone) {
             const headerUser = document.getElementById('header-user');
-            headerUser.innerHTML = `👤 <span class="liquid-text">${currentUser}</span>`;
+            headerUser.innerHTML = `👤 <span class="liquid-text">${name}</span>`;
             headerUser.classList.add('liquid-badge');
 
             const navAccount = document.getElementById('nav-account-text');
-            navAccount.innerHTML = `<span class="liquid-text">${currentUser}</span>`;
+            navAccount.innerHTML = `<span class="liquid-text">${name}</span>`;
 
-            document.getElementById('display-name').innerText = currentUser;
-            document.getElementById('display-phone').innerText = phoneInput;
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('display-phone').innerText = phone;
 
+            document.getElementById('auth-tabs').style.display = 'none';
             document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'none';
             document.getElementById('user-profile').style.display = 'block';
-            document.getElementById('modal-title').innerText = "My Profile";
-
-            alert("Logged in successfully!");
-            closeAccountModal();
         }
 
-        /* লগআউট লজিক */
+        // 4. Logout Logic
         function handleLogout() {
-            currentUser = null;
-
+            localStorage.removeItem("session_user"); // Clear login session
+            
             const headerUser = document.getElementById('header-user');
             headerUser.innerHTML = "👤 Login";
             headerUser.classList.remove('liquid-badge');
 
             document.getElementById('nav-account-text').innerText = "Account";
 
-            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('auth-tabs').style.display = 'flex';
             document.getElementById('user-profile').style.display = 'none';
-            document.getElementById('modal-title').innerText = "Account Login";
-            document.getElementById('username-input').value = "";
-            document.getElementById('userphone-input').value = "";
+            switchAuthTab('login');
 
-            alert("Logged out!");
+            alert("Logged out successfully!");
             closeAccountModal();
         }
     </script>
