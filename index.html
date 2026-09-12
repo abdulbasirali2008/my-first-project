@@ -238,7 +238,7 @@
             width: 100%;
         }
 
-        /* Product Details Modal Style */
+        /* Modal Styles */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -285,7 +285,7 @@
             z-index: 10;
         }
 
-        /* Detail Modal Specific Styles */
+        /* Product Details Styles */
         .details-img {
             width: 100%;
             height: 220px;
@@ -332,6 +332,73 @@
             line-height: 1.4;
         }
 
+        /* Cart Styles */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 10px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-price {
+            font-size: 13px;
+            color: #f57224;
+            font-weight: bold;
+        }
+
+        .remove-cart-item {
+            color: #ff3b30;
+            cursor: pointer;
+            font-size: 14px;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .cart-total-section {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .checkout-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        /* Auth Styles */
         .auth-tabs {
             display: flex;
             margin-bottom: 12px;
@@ -543,7 +610,7 @@
                     <span class="price">৳ 1,500</span>
                     <span class="rating"><span>★</span> 4.5 (289)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Smart Watch Series 7 Bluetooth Calling', 1500, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500" alt="Bluetooth Speaker">
@@ -552,7 +619,7 @@
                     <span class="price">৳ 2,500</span>
                     <span class="rating"><span>★</span> 4.8 (112)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('JBL Portable Wireless Bluetooth Speaker', 2500, 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
@@ -561,7 +628,7 @@
                     <span class="price">৳ 2,200</span>
                     <span class="rating"><span>★</span> 4.6 (95)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Sony Wireless Over-Ear Headphone', 2200, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="womens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Embroidery Kurti">
@@ -570,7 +637,7 @@
                     <span class="price">৳ 1,250</span>
                     <span class="rating"><span>★</span> 4.3 (74)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Designer Lawn Embroidery Kurti', 1250, 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="womens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500" alt="Georgette Saree">
@@ -579,7 +646,7 @@
                     <span class="price">৳ 2,800</span>
                     <span class="rating"><span>★</span> 4.7 (150)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Party Wear Georgette Saree', 2800, 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="mens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Casual Shirt">
@@ -588,7 +655,7 @@
                     <span class="price">৳ 950</span>
                     <span class="rating"><span>★</span> 4.4 (88)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Men\'s Slim Fit Casual Shirt', 950, 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="mens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1542272604-787c96355d55?w=500" alt="Jeans Pant">
@@ -597,7 +664,7 @@
                     <span class="price">৳ 1,350</span>
                     <span class="rating"><span>★</span> 4.5 (205)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Classic Blue Denim Jeans for Men', 1350, 'https://images.unsplash.com/photo-1542272604-787c96355d55?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="appliances" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500" alt="Smart TV">
@@ -606,7 +673,7 @@
                     <span class="price">৳ 16,500</span>
                     <span class="rating"><span>★</span> 4.9 (43)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Xiaomi 32\" HD Smart LED TV', 16500, 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500');">Add to Cart</button>
             </div>
             <div class="card" data-category="sports" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
@@ -615,7 +682,7 @@
                     <span class="price">৳ 3,500</span>
                     <span class="rating"><span>★</span> 4.7 (310)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Nike Running Sports Shoes', 3500, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500');">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -634,6 +701,26 @@
                     <p style="margin: 5px 0 15px 0; color: #666;">High quality product available at Shopping Bazar. 100% authentic item with fast home delivery.</p>
                 </div>
                 <button class="add-btn" style="padding: 12px; font-size: 14px;" onclick="addToCartFromDetails()">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeCartModal()">&times;</span>
+            <div class="modal-header-frame">
+                <h2 style="margin: 0; font-size: 18px;" class="liquid-text">Your Shopping Cart</h2>
+            </div>
+            <div class="modal-body-content">
+                <div id="cart-items-container" style="max-height: 250px; overflow-y: auto;">
+                    <p style="color: #777; font-size: 13px;">Your cart is empty!</p>
+                </div>
+                <div class="cart-total-section">
+                    <span>Total:</span>
+                    <span id="cart-total-price" style="color: #f57224;">৳ 0</span>
+                </div>
+                <button class="checkout-btn" onclick="alert('Checkout feature coming soon!');">Proceed to Checkout</button>
             </div>
         </div>
     </div>
@@ -688,7 +775,7 @@
                 <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4H4v4zm-6 4h4V4H4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
                 <span>Categories</span>
             </a>
-            <div class="nav-item" onclick="alert('Cart item list coming soon!');">
+            <div class="nav-item" onclick="openCartModal();">
                 <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 <span class="cart-badge" id="cart-count">0</span>
                 <span>Cart</span>
@@ -701,7 +788,9 @@
     </div>
 
     <script>
-        let count = 0;
+        let cart = [];
+        let currentProductForDetails = null;
+
         window.onload = function() { 
             checkAutoLogin(); 
             checkUrlCategory();
@@ -743,27 +832,75 @@
             });
         }
 
-        function addToCart() {
-            count++;
-            document.getElementById('cart-count').innerText = count;
+        function addToCart(title, price, img) {
+            cart.push({ title, price, img });
+            updateCartUI();
             alert("Product added to cart!");
         }
 
         function addToCartFromDetails() {
-            addToCart();
-            closeProductDetails();
+            if (currentProductForDetails) {
+                addToCart(currentProductForDetails.title, currentProductForDetails.price, currentProductForDetails.img);
+                closeProductDetails();
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            let container = document.getElementById('cart-items-container');
+            let totalPriceElem = document.getElementById('cart-total-price');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="color: #777; font-size: 13px;">Your cart is empty!</p>';
+                totalPriceElem.innerText = '৳ 0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="Item">
+                        <div class="cart-item-details">
+                            <div class="cart-item-title">${item.title}</div>
+                            <div class="cart-item-price">৳ ${item.price.toLocaleString()}</div>
+                        </div>
+                        <button class="remove-cart-item" onclick="removeFromCart(${index})">✕</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            totalPriceElem.innerText = '৳ ' + total.toLocaleString();
+        }
+
+        function openCartModal() {
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').style.display = 'none';
         }
 
         // Product Details Functions
         function openProductDetails(cardElement) {
             const imgSrc = cardElement.querySelector('img').src;
             const title = cardElement.querySelector('h3').innerText;
-            const price = cardElement.querySelector('.price').innerText;
+            const priceText = cardElement.querySelector('.price').innerText;
+            const price = parseInt(priceText.replace('৳', '').replace(',', '').trim());
             const rating = cardElement.querySelector('.rating').innerHTML;
+
+            currentProductForDetails = { title, price, img: imgSrc };
 
             document.getElementById('detail-img').src = imgSrc;
             document.getElementById('detail-title').innerText = title;
-            document.getElementById('detail-price').innerText = price;
+            document.getElementById('detail-price').innerText = priceText;
             document.getElementById('detail-rating').innerHTML = rating;
 
             document.getElementById('productDetailsModal').style.display = 'flex';
