@@ -13,7 +13,6 @@
             background-color: #f4f4f4;
         }
 
-        /* হেডার */
         header {
             background-color: #232f3e;
             color: white;
@@ -35,7 +34,6 @@
             align-items: center;
         }
 
-        /* সার্চ বার */
         .search-bar {
             flex-grow: 1;
             max-width: 400px;
@@ -82,7 +80,6 @@
             font-size: 13px;
         }
 
-        /* Liquid Text Effect */
         .liquid-text {
             background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
             background-size: 400% 400%;
@@ -105,7 +102,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Daraz Style Top Horizontal Menu / Shortcuts */
         .top-shortcuts {
             display: flex;
             gap: 15px;
@@ -114,11 +110,11 @@
             padding: 12px 15px;
             border-bottom: 1px solid #eee;
             white-space: nowrap;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
 
         .top-shortcuts::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
         }
 
         .shortcut-item {
@@ -127,6 +123,7 @@
             align-items: center;
             cursor: pointer;
             min-width: 60px;
+            text-decoration: none;
         }
 
         .shortcut-icon {
@@ -153,7 +150,6 @@
             font-weight: 600;
         }
 
-        /* Main Container */
         .container {
             max-width: 600px;
             margin: 10px auto;
@@ -167,7 +163,6 @@
             margin: 15px 5px 10px 5px;
         }
 
-        /* 2 Products Per Row Grid (Daraz Mobile View Style) */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -242,14 +237,8 @@
             font-weight: 600;
             font-size: 12px;
             width: 100%;
-            transition: background 0.2s;
         }
 
-        .add-btn:active {
-            background-color: #e64a19;
-        }
-
-        /* Floating Pill Bottom Navigation Bar */
         .bottom-nav-container {
             position: fixed;
             bottom: 12px;
@@ -287,6 +276,7 @@
             transition: all 0.3s ease;
             position: relative;
             flex: 1;
+            text-decoration: none;
         }
 
         .nav-item svg {
@@ -317,7 +307,6 @@
             border-radius: 10px;
         }
 
-        /* Modal Overlay & Styling */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -429,9 +418,8 @@
 </head>
 <body>
 
-    <!-- হেডার -->
     <header>
-        <div class="logo-container" onclick="window.scrollTo(0, 0);">
+        <div class="logo-container" onclick="window.location.href='index.html';">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
               <defs>
                 <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
@@ -453,7 +441,6 @@
             </svg>
         </div>
 
-        <!-- সার্চ বার -->
         <div class="search-bar">
             <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             <input type="text" id="searchInput" placeholder="Search in Shopping Bazar..." onkeyup="searchProducts()">
@@ -466,41 +453,37 @@
         </div>
     </header>
 
-    <!-- Daraz Style Top Horizontal Menu Shortcuts -->
     <div class="top-shortcuts">
-        <div class="shortcut-item" onclick="filterProducts('all')">
+        <a class="shortcut-item" href="categories.html">
             <div class="shortcut-icon" style="background: #ffebee;"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
-            <span>All</span>
-        </div>
-        <div class="shortcut-item" onclick="filterProducts('electronics')">
+            <span>All Cat</span>
+        </a>
+        <a class="shortcut-item" href="categories.html">
             <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></div>
             <span>Accessories</span>
-        </div>
-        <div class="shortcut-item" onclick="filterProducts('womens-fashion')">
+        </a>
+        <a class="shortcut-item" href="categories.html">
             <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M12 2C9.24 2 7 4.24 7 7c0 2.21 1.43 4.08 3.42 4.74-.38.52-.61 1.16-.62 1.86v4.4c0 1.1.9 2 2 2s2-.9 2-2v-4.4c-.01-.7-.24-1.34-.62-1.86C15.57 11.08 17 9.21 17 7c0-2.76-2.24-5-5-5z"/></svg></div>
             <span>Women's</span>
-        </div>
-        <div class="shortcut-item" onclick="filterProducts('mens-fashion')">
+        </a>
+        <a class="shortcut-item" href="categories.html">
             <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M19.34 5.92L17.5 4l-3.34 3.34L11 4 9.16 5.92 12.08 9H6.92L9.84 5.92 8 4 4.66 7.34 2.82 5.42 1 7.24l3.18 3.18L6.42 13h11.16l2.24-2.58L23 7.24l-1.82-1.82z"/></svg></div>
             <span>Men's</span>
-        </div>
-        <div class="shortcut-item" onclick="filterProducts('appliances')">
+        </a>
+        <a class="shortcut-item" href="categories.html">
             <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-8C6.13 2 3 5.13 3 9v6c0 3.87 3.13 7 7 7h8c3.87 0 7-3.13 7-7V9c0-3.87-3.13-7-7-7zm-8 18c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></div>
             <span>Appliances</span>
-        </div>
-        <div class="shortcut-item" onclick="filterProducts('sports')">
+        </a>
+        <a class="shortcut-item" href="categories.html">
             <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
             <span>Sports</span>
-        </div>
+        </a>
     </div>
 
     <div class="container">
         <div class="section-title">Just For You</div>
         
-        <!-- 2 Products Per Row Grid -->
         <div class="product-grid" id="product-grid">
-            
-            <!-- Electronics Accessories -->
             <div class="card" data-category="electronics">
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
                 <h3>Smart Watch Series 7 Bluetooth Calling</h3>
@@ -528,8 +511,6 @@
                 </div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
-            <!-- Women's Fashion -->
             <div class="card" data-category="womens-fashion">
                 <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Embroidery Kurti">
                 <h3>Designer Lawn Embroidery Kurti</h3>
@@ -548,8 +529,6 @@
                 </div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
-            <!-- Men's Fashion -->
             <div class="card" data-category="mens-fashion">
                 <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Casual Shirt">
                 <h3>Men's Slim Fit Casual Shirt</h3>
@@ -568,8 +547,6 @@
                 </div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
-            <!-- Appliances -->
             <div class="card" data-category="appliances">
                 <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500" alt="Smart TV">
                 <h3>Xiaomi 32" HD Smart LED TV</h3>
@@ -579,8 +556,6 @@
                 </div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
-            <!-- Sports -->
             <div class="card" data-category="sports">
                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
                 <h3>Nike Running Sports Shoes</h3>
@@ -590,11 +565,10 @@
                 </div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-
         </div>
     </div>
 
-    <!-- Auth / Profile Modal -->
+    <!-- Auth Modal -->
     <div class="modal-overlay" id="accountModal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeAccountModal()">&times;</span>
@@ -633,23 +607,23 @@
         </div>
     </div>
 
-    <!-- Floating Bottom Navigation Bar -->
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav-container">
         <div class="bottom-nav">
-            <div class="nav-item active" id="nav-home" onclick="setActiveNav('nav-home'); window.scrollTo(0, 0);">
+            <a class="nav-item active" href="index.html">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span>Home</span>
-            </div>
-            <div class="nav-item" id="nav-cat" onclick="setActiveNav('nav-cat'); window.location.href='categories.html';">
+            </a>
+            <a class="nav-item" href="categories.html">
                 <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4H4v4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
                 <span>Categories</span>
-            </div>
-            <div class="nav-item" id="nav-cart" onclick="setActiveNav('nav-cart'); alert('Cart item list coming soon!');">
+            </a>
+            <div class="nav-item" onclick="alert('Cart item list coming soon!');">
                 <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 <span class="cart-badge" id="cart-count">0</span>
                 <span>Cart</span>
             </div>
-            <div class="nav-item" id="nav-account" onclick="setActiveNav('nav-account'); openAccountModal();">
+            <div class="nav-item" onclick="openAccountModal();">
                 <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <span id="nav-account-text">Account</span>
             </div>
@@ -658,35 +632,14 @@
 
     <script>
         let count = 0;
+        window.onload = function() { checkAutoLogin(); };
 
-        window.onload = function() {
-            checkAutoLogin();
-        };
-
-        // Real-time Search Function
         function searchProducts() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.querySelectorAll('.card');
-
             cards.forEach(card => {
                 let title = card.querySelector('h3').innerText.toLowerCase();
-                if (title.includes(input)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Category Filter Function
-        function filterProducts(category) {
-            let cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = title.includes(input) ? 'flex' : 'none';
             });
         }
 
@@ -695,18 +648,8 @@
             document.getElementById('cart-count').innerText = count;
         }
 
-        function setActiveNav(elementId) {
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
-            document.getElementById(elementId).classList.add('active');
-        }
-
-        function openAccountModal() {
-            document.getElementById('accountModal').style.display = 'flex';
-        }
-
-        function closeAccountModal() {
-            document.getElementById('accountModal').style.display = 'none';
-        }
+        function openAccountModal() { document.getElementById('accountModal').style.display = 'flex'; }
+        function closeAccountModal() { document.getElementById('accountModal').style.display = 'none'; }
 
         function switchAuthTab(tab) {
             if (tab === 'login') {
@@ -726,15 +669,8 @@
             const name = document.getElementById('signup-name').value.trim();
             const phone = document.getElementById('signup-phone').value.trim();
             const pass = document.getElementById('signup-pass').value.trim();
-
-            if (!name || !phone || !pass) {
-                alert("Please fill in all fields!");
-                return;
-            }
-
-            const userData = { name: name, phone: phone, pass: pass };
-            localStorage.setItem("user_" + phone, JSON.stringify(userData));
-
+            if (!name || !phone || !pass) { alert("Please fill in all fields!"); return; }
+            localStorage.setItem("user_" + phone, JSON.stringify({ name, phone, pass }));
             alert("Account created successfully! Now please login.");
             switchAuthTab('login');
             document.getElementById('login-phone').value = phone;
@@ -743,23 +679,14 @@
         function handleLogin() {
             const phone = document.getElementById('login-phone').value.trim();
             const pass = document.getElementById('login-pass').value.trim();
-
             const savedUser = localStorage.getItem("user_" + phone);
-
-            if (!savedUser) {
-                alert("No account found with this phone number! Please Sign Up first.");
-                return;
-            }
-
+            if (!savedUser) { alert("No account found! Please Sign Up first."); return; }
             const parsedUser = JSON.parse(savedUser);
-
             if (parsedUser.pass === pass) {
                 localStorage.setItem("session_user", JSON.stringify(parsedUser));
                 applyLoggedInUI(parsedUser.name, parsedUser.phone);
                 closeAccountModal();
-            } else {
-                alert("Incorrect Password!");
-            }
+            } else { alert("Incorrect Password!"); }
         }
 
         function checkAutoLogin() {
@@ -774,13 +701,9 @@
             const headerUser = document.getElementById('header-user');
             headerUser.innerHTML = `👤 <span class="liquid-text">${name}</span>`;
             headerUser.classList.add('liquid-badge');
-
-            const navAccount = document.getElementById('nav-account-text');
-            navAccount.innerHTML = `<span class="liquid-text">${name}</span>`;
-
+            document.getElementById('nav-account-text').innerHTML = `<span class="liquid-text">${name}</span>`;
             document.getElementById('display-name').innerText = name;
             document.getElementById('display-phone').innerText = phone;
-
             document.getElementById('auth-tabs').style.display = 'none';
             document.getElementById('login-form').style.display = 'none';
             document.getElementById('signup-form').style.display = 'none';
@@ -789,20 +712,8 @@
 
         function handleLogout() {
             localStorage.removeItem("session_user");
-            
-            const headerUser = document.getElementById('header-user');
-            headerUser.innerHTML = "👤 Login";
-            headerUser.classList.remove('liquid-badge');
-
-            document.getElementById('nav-account-text').innerText = "Account";
-
-            document.getElementById('auth-tabs').style.display = 'flex';
-            document.getElementById('user-profile').style.display = 'none';
-            switchAuthTab('login');
-
-            closeAccountModal();
+            location.reload();
         }
     </script>
-
 </body>
 </html>
