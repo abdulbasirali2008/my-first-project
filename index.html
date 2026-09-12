@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 70px; /* বটম বারের জন্য নিচে ফাঁকা জায়গা */
+            padding-bottom: 70px;
             background-color: #f4f4f4;
         }
 
@@ -54,11 +54,19 @@
             font-weight: bold;
         }
 
-        .cart-box {
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-box, .user-status {
             font-weight: bold;
             background: #37475a;
             padding: 8px 15px;
             border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
         }
 
         /* অফার ব্যানার */
@@ -158,6 +166,67 @@
         .nav-item:hover {
             color: #ff9900;
         }
+
+        /* অ্যাকাউন্ট লগইন মোডাল (Pop-up) Style */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .modal-box h3 {
+            margin-top: 0;
+            color: #232f3e;
+        }
+
+        .modal-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .login-submit-btn {
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 95%;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
     </style>
 </head>
 <body>
@@ -171,9 +240,16 @@
             <button>Search</button>
         </div>
 
-        <!-- কার্ট কাউন্টার -->
-        <div class="cart-box">
-            🛒 Cart (<span id="cart-count">0</span>)
+        <div class="header-right">
+            <!-- ইউজারের নাম বা লগইন বাটন -->
+            <div class="user-status" id="header-user" onclick="openAccountModal()">
+                👤 Login
+            </div>
+
+            <!-- কার্ট কাউন্টার -->
+            <div class="cart-box">
+                🛒 Cart (<span id="cart-count">0</span>)
+            </div>
         </div>
     </header>
 
@@ -221,9 +297,28 @@
         </div>
     </div>
 
-    <!-- নিচে নতুন যোগ করা বাটনসমূহ -->
+    <!-- অ্যাকাউন্ট লগইন পপ-আপ (Modal) -->
+    <div class="modal-overlay" id="accountModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeAccountModal()">&times;</span>
+            <h3 id="modal-title">Account Login</h3>
+            
+            <div id="login-form">
+                <input type="text" id="username-input" placeholder="Enter your name">
+                <input type="password" placeholder="Password">
+                <button class="login-submit-btn" onclick="handleLogin()">Login</button>
+            </div>
+
+            <div id="user-profile" style="display: none;">
+                <p>Welcome, <b id="display-name">User</b>!</p>
+                <button class="login-submit-btn" style="background:#d9534f;" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- বটম নেভিগেশন বার -->
     <div class="bottom-nav">
-        <div class="nav-item" onclick="alert('You are on Home page')">
+        <div class="nav-item" onclick="window.scrollTo(0, 0)">
             <span>🏠</span>
             Home
         </div>
@@ -231,18 +326,67 @@
             <span>📂</span>
             Categories
         </div>
-        <div class="nav-item" onclick="alert('Account settings coming soon!')">
+        <div class="nav-item" onclick="openAccountModal()">
             <span>👤</span>
-            Account
+            <span id="nav-account-text">Account</span>
         </div>
     </div>
 
     <script>
         let count = 0;
+        let currentUser = null;
+
         function addToCart() {
             count++;
             document.getElementById('cart-count').innerText = count;
             alert("Item added to cart!");
+        }
+
+        /* অ্যাকাউন্ট মোডাল কন্ট্রোল */
+        function openAccountModal() {
+            document.getElementById('accountModal').style.display = 'flex';
+        }
+
+        function closeAccountModal() {
+            document.getElementById('accountModal').style.display = 'none';
+        }
+
+        /* লগইন লজিক */
+        function handleLogin() {
+            const nameInput = document.getElementById('username-input').value;
+            if (nameInput.trim() === "") {
+                alert("Please enter a valid name!");
+                return;
+            }
+
+            currentUser = nameInput;
+            
+            // ইউজার ইন্টারফেস আপডেট
+            document.getElementById('display-name').innerText = currentUser;
+            document.getElementById('header-user').innerText = "👤 " + currentUser;
+            document.getElementById('nav-account-text').innerText = currentUser;
+
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('user-profile').style.display = 'block';
+            document.getElementById('modal-title').innerText = "My Profile";
+
+            alert("Logged in successfully!");
+            closeAccountModal();
+        }
+
+        /* লগআউট লজিক */
+        function handleLogout() {
+            currentUser = null;
+            document.getElementById('header-user').innerText = "👤 Login";
+            document.getElementById('nav-account-text').innerText = "Account";
+
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('user-profile').style.display = 'none';
+            document.getElementById('modal-title').innerText = "Account Login";
+            document.getElementById('username-input').value = "";
+
+            alert("Logged out!");
+            closeAccountModal();
         }
     </script>
 
