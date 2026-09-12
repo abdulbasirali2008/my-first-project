@@ -25,7 +25,6 @@
             gap: 15px;
         }
 
-        /* লোগোর আকার নিয়ন্ত্রণ */
         header .logo-container {
             width: 200px;
             height: auto;
@@ -90,7 +89,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Universal Liquid Text Effect */
+        /* Liquid Text Effect */
         .liquid-text {
             background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
             background-size: 400% 400%;
@@ -123,9 +122,49 @@
             font-size: 18px;
         }
 
+        /* Category Filter Bar (Scrollable) */
+        .category-container {
+            max-width: 1000px;
+            margin: 20px auto 5px;
+            padding: 0 20px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE 10+ */
+        }
+        .category-container::-webkit-scrollbar { 
+            display: none; /* Chrome, Safari */
+        }
+
+        .cat-btn {
+            padding: 8px 18px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            color: #444;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .cat-btn:hover {
+            border-color: #ff9900;
+            color: #ff9900;
+        }
+
+        .cat-btn.active {
+            background: #ff9900;
+            color: white;
+            border-color: #ff9900;
+            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.3);
+        }
+
         .container {
             max-width: 1000px;
-            margin: 30px auto;
+            margin: 15px auto 30px;
             padding: 0 20px;
         }
 
@@ -141,6 +180,12 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
         }
 
         .card img {
@@ -151,13 +196,26 @@
         }
 
         .card h3 {
-            font-size: 18px;
+            font-size: 16px;
             margin: 10px 0 5px;
+            color: #222;
+        }
+        
+        .card .badge {
+            background: #ff007f;
+            color: white;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            font-weight: bold;
         }
 
         .price {
             color: #B12704;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             margin-bottom: 10px;
         }
@@ -170,6 +228,11 @@
             cursor: pointer;
             font-weight: bold;
             width: 100%;
+            transition: background 0.2s;
+        }
+        
+        .add-btn:active {
+            background-color: #f7ca00;
         }
 
         /* Floating Pill Bottom Navigation Bar */
@@ -266,7 +329,6 @@
             overflow: hidden;
         }
 
-        /* Upper Light Color Frame Header for Modal */
         .modal-header-frame {
             background: linear-gradient(135deg, #e3f2fd, #f3e5f5, #e8f5e9);
             padding: 22px 15px 15px 15px;
@@ -361,7 +423,6 @@
 <body>
 
     <header>
-        <!-- SHOPPING BAZAR Logo -->
         <div class="logo-container" onclick="window.scrollTo(0, 0);">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
               <defs>
@@ -379,23 +440,14 @@
                 <path d="M 12 28 L 62 28 L 56 75 C 56 78 53 80 50 80 L 24 80 C 21 80 18 78 18 75 Z" fill="url(#bagGrad)" filter="url(#glow)"/>
                 <path d="M 28 52 L 35 60 L 48 45" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
               </g>
-              <text x="90" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#FF9900" letter-spacing="1">
-                SHOPPING
-              </text>
-              <text x="275" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#00D2FF" filter="url(#glow)" letter-spacing="1">
-                BAZAR
-              </text>
-              <text x="92" y="75" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#A0A0A0" letter-spacing="3">
-                YOUR TRUSTED ONLINE SHOP
-              </text>
+              <text x="90" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#FF9900" letter-spacing="1">SHOPPING</text>
+              <text x="275" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#00D2FF" filter="url(#glow)" letter-spacing="1">BAZAR</text>
+              <text x="92" y="75" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#A0A0A0" letter-spacing="3">YOUR TRUSTED ONLINE SHOP</text>
             </svg>
         </div>
 
-        <!-- Pill Style Search Bar -->
         <div class="search-bar">
-            <svg class="search-icon" viewBox="0 0 24 24">
-                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            </svg>
+            <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             <input type="text" placeholder="Search">
         </div>
 
@@ -407,36 +459,87 @@
     </header>
 
     <div class="banner">
-        🔥 Big Sale! Get 20% OFF on all items today!
+        🔥 Big Sale! Get 20% OFF on Electronics today!
     </div>
 
+    <!-- Category Filter Bar -->
+    <div class="category-container" id="category-section">
+        <button class="cat-btn active" onclick="filterProducts('all', this)">All Items</button>
+        <button class="cat-btn" onclick="filterProducts('electronics', this)">📱 Electronics</button>
+        <button class="cat-btn" onclick="filterProducts('appliances', this)">🔌 Appliances</button>
+        <button class="cat-btn" onclick="filterProducts('accessories', this)">🎧 Accessories</button>
+        <button class="cat-btn" onclick="filterProducts('shoes', this)">👟 Shoes</button>
+    </div>
+
+    <!-- Product Container -->
     <div class="container">
-        <h2>Featured Products</h2>
-        <div class="product-grid">
-            <div class="card">
+        <div class="product-grid" id="product-grid">
+            
+            <!-- Product 1 -->
+            <div class="card" data-category="electronics">
+                <div class="badge" style="position:relative; top:10px; left: -75px;">New</div>
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
-                <h3>Smart Watch</h3>
+                <h3>Smart Watch Series 7</h3>
                 <div class="price">৳ 1,500</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-            <div class="card">
+
+            <!-- Product 2 -->
+            <div class="card" data-category="accessories">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
-                <h3>Wireless Headphone</h3>
+                <h3>Sony Wireless Headphone</h3>
                 <div class="price">৳ 2,200</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-            <div class="card">
+
+            <!-- Product 3 -->
+            <div class="card" data-category="accessories">
                 <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" alt="USB Keyboard">
-                <h3>USB Keyboard</h3>
-                <div class="price">৳ 850</div>
+                <h3>Mechanical RGB Keyboard</h3>
+                <div class="price">৳ 1,850</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-            <div class="card">
+
+            <!-- Product 4 -->
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1585149377464-325b3a32fcfc?w=500" alt="Electric Kettle">
+                <h3>Stainless Steel Electric Kettle</h3>
+                <div class="price">৳ 950</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Product 5 (New) -->
+            <div class="card" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500" alt="Power Bank">
+                <h3>Fast Charging Power Bank 10000mAh</h3>
+                <div class="price">৳ 1,200</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Product 6 (New) -->
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1544228784-07d0f98018e6?w=500" alt="Electric Iron">
+                <h3>Philips Dry Iron</h3>
+                <div class="price">৳ 1,150</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Product 7 (New) -->
+            <div class="card" data-category="electronics">
+                <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500" alt="Bluetooth Speaker">
+                <h3>JBL Portable Bluetooth Speaker</h3>
+                <div class="price">৳ 2,500</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Product 8 (Old) -->
+            <div class="card" data-category="shoes">
                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
-                <h3>Running Shoes</h3>
+                <h3>Nike Running Shoes</h3>
                 <div class="price">৳ 3,500</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
+
         </div>
     </div>
 
@@ -444,12 +547,9 @@
     <div class="modal-overlay" id="accountModal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeAccountModal()">&times;</span>
-            
-            <!-- Modal Header with Light Frame Effect -->
             <div class="modal-header-frame">
                 <h2 style="margin: 0; font-size: 22px;" class="liquid-text">SHOPPING BAZAR</h2>
             </div>
-
             <div class="modal-body-content">
                 <div class="auth-tabs" id="auth-tabs">
                     <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</div>
@@ -469,7 +569,6 @@
                     <button class="login-submit-btn" style="background:#28a745;" onclick="handleSignUp()">Sign Up</button>
                 </div>
 
-                <!-- Logged In Welcome Profile Section -->
                 <div id="user-profile" style="display: none;">
                     <p style="font-size: 20px; font-weight: 600; color: #222; margin-top: 5px;">
                         Welcome, <span id="display-name" class="liquid-text">User</span>!
@@ -477,8 +576,6 @@
                     <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
                         Phone: <span id="display-phone" style="font-weight: 600;"></span>
                     </p>
-                    
-                    <!-- Liquid Logout Button -->
                     <button class="liquid-logout-btn" onclick="handleLogout()">Logout</button>
                 </div>
             </div>
@@ -492,10 +589,13 @@
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span>Home</span>
             </div>
-            <div class="nav-item" id="nav-cat" onclick="setActiveNav('nav-cat'); alert('Categories coming soon!');">
+            
+            <!-- Category Button now scrolls to Category Filter -->
+            <div class="nav-item" id="nav-cat" onclick="setActiveNav('nav-cat'); document.getElementById('category-section').scrollIntoView({behavior: 'smooth', block: 'center'});">
                 <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
                 <span>Categories</span>
             </div>
+
             <div class="nav-item" id="nav-cart" onclick="setActiveNav('nav-cart'); alert('Cart item list coming soon!');">
                 <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 <span class="cart-badge" id="cart-count">0</span>
@@ -515,10 +615,30 @@
             checkAutoLogin();
         };
 
+        // Category Filter Function
+        function filterProducts(category, btnElement) {
+            // Remove 'active' class from all category buttons
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add 'active' class to the clicked button
+            btnElement.classList.add('active');
+
+            // Filter logic
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block'; // Show card
+                } else {
+                    card.style.display = 'none';  // Hide card
+                }
+            });
+        }
+
         function addToCart() {
             count++;
             document.getElementById('cart-count').innerText = count;
-            alert("Item added to cart!");
+            // Button feedback effect (optional styling added in CSS)
         }
 
         function setActiveNav(elementId) {
@@ -582,7 +702,7 @@
             if (parsedUser.pass === pass) {
                 localStorage.setItem("session_user", JSON.stringify(parsedUser));
                 applyLoggedInUI(parsedUser.name, parsedUser.phone);
-                alert("Logged in successfully!");
+                // alert("Logged in successfully!"); // You can remove this for a smoother experience
                 closeAccountModal();
             } else {
                 alert("Incorrect Password!");
@@ -627,7 +747,7 @@
             document.getElementById('user-profile').style.display = 'none';
             switchAuthTab('login');
 
-            alert("Logged out successfully!");
+            // alert("Logged out successfully!");
             closeAccountModal();
         }
     </script>
