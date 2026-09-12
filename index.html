@@ -72,12 +72,7 @@
         }
 
         .user-status {
-            font-weight: bold;
-            background: #37475a;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
+            display: none; /* সার্চ বারের নিচের নাম বা ব্যাজটি লুকিয়ে রাখা হলো */
         }
 
         .liquid-text {
@@ -87,13 +82,6 @@
             -webkit-text-fill-color: transparent;
             font-weight: 800;
             animation: liquidGlow 6s ease infinite;
-        }
-
-        .liquid-badge {
-            border: 2px solid transparent;
-            background-image: linear-gradient(#37475a, #37475a), linear-gradient(90deg, #00d2ff, #ff007f);
-            background-origin: border-box;
-            background-clip: content-box, border-box;
         }
 
         @keyframes liquidGlow {
@@ -741,9 +729,6 @@
         }
 
         function applyLoggedInUI(name, phone) {
-            const headerUser = document.getElementById('header-user');
-            headerUser.innerHTML = `👤 <span class="liquid-text">${name}</span>`;
-            headerUser.classList.add('liquid-badge');
             document.getElementById('nav-account-text').innerHTML = `<span class="liquid-text">${name}</span>`;
             document.getElementById('display-name').innerText = name;
             document.getElementById('display-phone').innerText = phone;
