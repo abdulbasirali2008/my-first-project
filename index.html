@@ -20,12 +20,54 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         header .logo {
             font-size: 24px;
             font-weight: bold;
             color: #ff9900;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 400px;
+            display: flex;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .search-bar button {
+            background-color: #ff9900;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-box {
+            font-weight: bold;
+            background: #37475a;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        /* অফার ব্যানার */
+        .banner {
+            background: linear-gradient(90deg, #ff9900, #ff5500);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 18px;
         }
 
         /* প্রোডাক্ট গ্রিড */
@@ -88,8 +130,23 @@
 
     <header>
         <div class="logo">My Shop</div>
-        <div>Cart (0)</div>
+        
+        <!-- সার্চ বার -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search products...">
+            <button>Search</button>
+        </div>
+
+        <!-- কার্ট কাউন্টার -->
+        <div class="cart-box">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </div>
     </header>
+
+    <!-- প্রমো ব্যানার -->
+    <div class="banner">
+        🔥 Big Sale! Get 20% OFF on all items today!
+    </div>
 
     <div class="container">
         <h2>Featured Products</h2>
@@ -119,12 +176,23 @@
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
 
+            <!-- প্রোডাক্ট ৪ -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
+                <h3>Running Shoes</h3>
+                <div class="price">৳ 3,500</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
         </div>
     </div>
 
     <script>
+        let count = 0;
         function addToCart() {
-            alert("Item added to cart successfully!");
+            count++;
+            document.getElementById('cart-count').innerText = count;
+            alert("Item added to cart!");
         }
     </script>
 
