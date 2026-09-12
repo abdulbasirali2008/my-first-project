@@ -261,7 +261,7 @@
 
 <div class="product-grid" id="product-grid">
     
-    <!-- নতুন ৪টি ছবি ও ৬০০ টাকা দামের পলো শার্ট প্রোডাক্ট -->
+    <!-- পলো শার্ট প্রোডাক্ট (৪টি ছবিসহ) -->
     <div class="card" data-category="mens-fashion" onclick="openMultiPhotoProduct(this)" 
          data-images='["76248.jpg", "76249.jpg", "76250.jpg", "76251.jpg"]'
          data-title="Treko Premium Waffle Polo Shirt" 
@@ -269,18 +269,18 @@
         <img src="76248.jpg" alt="Treko Polo Shirt">
         <h3>Treko Premium Waffle Polo Shirt</h3>
         <div class="price-row">
-            <span class="price">৳ ৬০০</span>
+            <span class="price">Tk 600</span>
             <span class="rating"><span>★</span> 4.8 (25)</span>
         </div>
         <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Premium Waffle Polo Shirt', 600, '76248.jpg');">Add to Cart</button>
     </div>
 
-    <!-- আগের একটি ডেমো প্রোডাক্ট (চাইলে রাখতে পারেন বা পরিবর্তন করতে পারেন) -->
-    <div class="card" data-category="sports" onclick="openSinglePhotoProduct('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500', 'Nike Running Sports Shoes', '৳ ৩,৫০০', 'High quality running shoes for ultimate comfort.')">
+    <!-- জুতার প্রোডাক্ট -->
+    <div class="card" data-category="sports" onclick="openSinglePhotoProduct('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500', 'Nike Running Sports Shoes', 'Tk 3,500', 'High quality running shoes for ultimate comfort.')">
         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Nike Shoes">
         <h3>Nike Running Sports Shoes</h3>
         <div class="price-row">
-            <span class="price">৳ ৩,৫০০</span>
+            <span class="price">Tk 3,500</span>
             <span class="rating"><span>★</span> 4.7 (310)</span>
         </div>
         <button class="add-btn" onclick="event.stopPropagation(); addToCart('Nike Running Sports Shoes', 3500, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500');">Add to Cart</button>
@@ -296,7 +296,7 @@
             <img id="detail-img" class="details-img" src="" alt="Product">
             <div id="thumbnail-container" class="thumbnail-container"></div>
             <div id="detail-title" class="details-title">Product Name</div>
-            <div id="detail-price" class="details-price">৳ 0</div>
+            <div id="detail-price" class="details-price">Tk 0</div>
             <div class="details-desc">
                 <strong>Description:</strong>
                 <p style="margin: 5px 0 15px 0; color: #666;">High quality premium product designed for everyday comfort and style.</p>
@@ -310,7 +310,7 @@
     function openMultiPhotoProduct(element) {
         const images = JSON.parse(element.getAttribute('data-images'));
         const title = element.getAttribute('data-title');
-        const price = '৳ ' + element.getAttribute('data-price');
+        const price = 'Tk ' + element.getAttribute('data-price');
         const rawPrice = parseInt(element.getAttribute('data-price'));
 
         document.getElementById('detail-img').src = images[0];
