@@ -294,6 +294,28 @@
             margin-bottom: 12px;
         }
 
+        /* Multiple Images Grid inside Details Modal */
+        .details-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .details-gallery img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        .details-gallery img:hover {
+            border-color: #ff5722;
+        }
+
         .details-title {
             font-size: 16px;
             font-weight: 700;
@@ -618,7 +640,7 @@
             <span>Men's</span>
         </a>
         <a class="shortcut-item" href="index.html?cat=appliances">
-            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-8C6.13 2 3 5.13 3 9v6c0 3.87 3.13 7 7 7h8c3.87 0 7-3.13 7-7V9c0-3.87-3.13-7-7-7zm-8 18c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></div>
+            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-8C6.13 2 3 5.13 3 9v6c0 3.87 3.13 7 7 7h8c3.87 0 7-3.13 7-7V9c0-3.87-3.13-7-7-7zm-8 18c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5 z"/></svg></div>
             <span>Appliances</span>
         </a>
         <a class="shortcut-item" href="index.html?cat=sports">
@@ -635,18 +657,27 @@
         
         <div class="product-grid" id="product-grid">
             
-            <!-- নতুন যোগ করা প্রোডাক্ট (উদাহরণ) -->
+            <!-- নতুন যুক্ত হওয়া Treko Polo Shirt (৪টি ছবি সমet) -->
+            <div class="card" data-category="mens-fashion" onclick="openMultiImageProduct('Treko Men\'s Stylish Collar Polo Shirt', 600, '4.9 (56)', ['76251.jpg', '76248.jpg', '76249.jpg', '76250.jpg'])">
+                <img src="76251.jpg" alt="Treko Polo Shirt">
+                <h3>Treko Men's Stylish Collar Polo Shirt</h3>
+                <div class="price-row">
+                    <span class="price">৳ 600</span>
+                    <span class="rating"><span>★</span> 4.9 (56)</span>
+                </div>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Men\'s Stylish Collar Polo Shirt', 600, '76251.jpg');">Add to Cart</button>
+            </div>
+
+            <!-- আগের প্রোডাক্টসমূহ -->
             <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="New Headphone">
                 <h3>Wireless Bass Gaming Headphone</h3>
                 <div class="price-row">
-                    <span class="price">৳ ১,৮৫০</span>
+                    <span class="price">৳ 1,850</span>
                     <span class="rating"><span>★</span> 4.8 (45)</span>
                 </div>
                 <button class="add-btn" onclick="event.stopPropagation(); addToCart('Wireless Bass Gaming Headphone', 1850, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500');">Add to Cart</button>
             </div>
-
-            <!-- আগের প্রোডাক্টসমূহ -->
             <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
                 <h3>Smart Watch Series 7 Bluetooth Calling</h3>
@@ -710,6 +741,9 @@
             <span class="close-btn" onclick="closeProductDetails()">&times;</span>
             <div class="modal-body-content" style="text-align: left;">
                 <img id="detail-img" class="details-img" src="" alt="Product Image">
+                <!-- Gallery grid for multi-images -->
+                <div id="detail-gallery" class="details-gallery" style="display: none;"></div>
+                
                 <div id="detail-title" class="details-title">Product Name</div>
                 <div id="detail-price" class="details-price">৳ 0</div>
                 <div id="detail-rating" class="details-rating"><span>★</span> 0 (0)</div>
@@ -932,9 +966,34 @@
             currentProductForDetails = { title, price, img: imgSrc };
 
             document.getElementById('detail-img').src = imgSrc;
+            document.getElementById('detail-img').style.display = 'block';
+            document.getElementById('detail-gallery').style.display = 'none';
             document.getElementById('detail-title').innerText = title;
             document.getElementById('detail-price').innerText = priceText;
             document.getElementById('detail-rating').innerHTML = rating;
+
+            document.getElementById('productDetailsModal').style.display = 'flex';
+        }
+
+        // Special function to handle 1 product card with multiple images inside detail modal
+        function openMultiImageProduct(title, price, ratingText, imagesArray) {
+            currentProductForDetails = { title, price, img: imagesArray[0] };
+
+            document.getElementById('detail-img').src = imagesArray[0];
+            document.getElementById('detail-img').style.display = 'block';
+
+            let galleryHtml = '';
+            imagesArray.forEach(imgSrc => {
+                galleryHtml += `<img src="${imgSrc}" onclick="document.getElementById('detail-img').src='${imgSrc}'" alt="Thumbnail">`;
+            });
+
+            let galleryContainer = document.getElementById('detail-gallery');
+            galleryContainer.innerHTML = galleryHtml;
+            galleryContainer.style.display = 'grid';
+
+            document.getElementById('detail-title').innerText = title;
+            document.getElementById('detail-price').innerText = '৳ ' + price;
+            document.getElementById('detail-rating').innerHTML = `<span>★</span> ${ratingText}`;
 
             document.getElementById('productDetailsModal').style.display = 'flex';
         }
