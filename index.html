@@ -72,7 +72,7 @@
         }
 
         .user-status {
-            display: none; /* সার্চ বারের নিচের নাম বা ব্যাজটি লুকিয়ে রাখা হলো */
+            display: none;
         }
 
         .liquid-text {
@@ -176,6 +176,7 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            cursor: pointer;
         }
 
         .card img {
@@ -235,6 +236,164 @@
             font-weight: 600;
             font-size: 12px;
             width: 100%;
+        }
+
+        /* Product Details Modal Style */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header-frame {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5, #e8f5e9);
+            padding: 20px 15px 12px 15px;
+        }
+
+        .modal-body-content {
+            padding: 18px 20px 22px 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #666;
+            z-index: 10;
+        }
+
+        /* Detail Modal Specific Styles */
+        .details-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .details-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .details-price {
+            font-size: 20px;
+            color: #f57224;
+            font-weight: bold;
+            text-align: left;
+            margin-bottom: 8px;
+        }
+
+        .details-rating {
+            font-size: 13px;
+            color: #757575;
+            text-align: left;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .details-rating span {
+            color: #ff9d00;
+        }
+
+        .details-desc {
+            font-size: 13px;
+            color: #555;
+            text-align: left;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .auth-tab.active {
+            color: #ff5722;
+            border-bottom: 3px solid #ff5722;
+        }
+
+        .modal-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 6px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .login-submit-btn {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .liquid-logout-btn {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 15px;
+            background: linear-gradient(270deg, #ff0844, #ffb199, #f107a3, #ff0844);
+            background-size: 400% 400%;
+            animation: liquidButtonAnimation 4s ease infinite;
+        }
+
+        @keyframes liquidButtonAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .bottom-nav-container {
@@ -303,114 +462,6 @@
             font-weight: bold;
             padding: 1px 5px;
             border-radius: 10px;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(4px);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .modal-box {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 340px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .modal-header-frame {
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5, #e8f5e9);
-            padding: 20px 15px 12px 15px;
-        }
-
-        .modal-body-content {
-            padding: 18px 20px 22px 20px;
-        }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .auth-tab.active {
-            color: #ff5722;
-            border-bottom: 3px solid #ff5722;
-        }
-
-        .modal-box input {
-            width: 90%;
-            padding: 10px;
-            margin: 6px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .login-submit-btn {
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 12px;
-            font-size: 20px;
-            cursor: pointer;
-            color: #666;
-            z-index: 10;
-        }
-
-        .liquid-logout-btn {
-            width: 100%;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 25px;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 15px;
-            background: linear-gradient(270deg, #ff0844, #ffb199, #f107a3, #ff0844);
-            background-size: 400% 400%;
-            animation: liquidButtonAnimation 4s ease infinite;
-        }
-
-        @keyframes liquidButtonAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
@@ -485,86 +536,104 @@
         </div>
         
         <div class="product-grid" id="product-grid">
-            <div class="card" data-category="accessories">
+            <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
                 <h3>Smart Watch Series 7 Bluetooth Calling</h3>
                 <div class="price-row">
                     <span class="price">৳ 1,500</span>
                     <span class="rating"><span>★</span> 4.5 (289)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="accessories">
+            <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500" alt="Bluetooth Speaker">
                 <h3>JBL Portable Wireless Bluetooth Speaker</h3>
                 <div class="price-row">
                     <span class="price">৳ 2,500</span>
                     <span class="rating"><span>★</span> 4.8 (112)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="accessories">
+            <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
                 <h3>Sony Wireless Over-Ear Headphone</h3>
                 <div class="price-row">
                     <span class="price">৳ 2,200</span>
                     <span class="rating"><span>★</span> 4.6 (95)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="womens-fashion">
+            <div class="card" data-category="womens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Embroidery Kurti">
                 <h3>Designer Lawn Embroidery Kurti</h3>
                 <div class="price-row">
                     <span class="price">৳ 1,250</span>
                     <span class="rating"><span>★</span> 4.3 (74)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="womens-fashion">
+            <div class="card" data-category="womens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500" alt="Georgette Saree">
                 <h3>Party Wear Georgette Saree</h3>
                 <div class="price-row">
                     <span class="price">৳ 2,800</span>
                     <span class="rating"><span>★</span> 4.7 (150)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="mens-fashion">
+            <div class="card" data-category="mens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Casual Shirt">
                 <h3>Men's Slim Fit Casual Shirt</h3>
                 <div class="price-row">
                     <span class="price">৳ 950</span>
                     <span class="rating"><span>★</span> 4.4 (88)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="mens-fashion">
+            <div class="card" data-category="mens-fashion" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1542272604-787c96355d55?w=500" alt="Jeans Pant">
                 <h3>Classic Blue Denim Jeans for Men</h3>
                 <div class="price-row">
                     <span class="price">৳ 1,350</span>
                     <span class="rating"><span>★</span> 4.5 (205)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="appliances">
+            <div class="card" data-category="appliances" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500" alt="Smart TV">
                 <h3>Xiaomi 32" HD Smart LED TV</h3>
                 <div class="price-row">
                     <span class="price">৳ 16,500</span>
                     <span class="rating"><span>★</span> 4.9 (43)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
             </div>
-            <div class="card" data-category="sports">
+            <div class="card" data-category="sports" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
                 <h3>Nike Running Sports Shoes</h3>
                 <div class="price-row">
                     <span class="price">৳ 3,500</span>
                     <span class="rating"><span>★</span> 4.7 (310)</span>
                 </div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart();">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal-overlay" id="productDetailsModal">
+        <div class="modal-box">
+            <span class="close-btn" onclick="closeProductDetails()">&times;</span>
+            <div class="modal-body-content" style="text-align: left;">
+                <img id="detail-img" class="details-img" src="" alt="Product Image">
+                <div id="detail-title" class="details-title">Product Name</div>
+                <div id="detail-price" class="details-price">৳ 0</div>
+                <div id="detail-rating" class="details-rating"><span>★</span> 0 (0)</div>
+                <div class="details-desc">
+                    <strong>Description:</strong> 
+                    <p style="margin: 5px 0 15px 0; color: #666;">High quality product available at Shopping Bazar. 100% authentic item with fast home delivery.</p>
+                </div>
+                <button class="add-btn" style="padding: 12px; font-size: 14px;" onclick="addToCartFromDetails()">Add to Cart</button>
             </div>
         </div>
     </div>
@@ -677,6 +746,31 @@
         function addToCart() {
             count++;
             document.getElementById('cart-count').innerText = count;
+            alert("Product added to cart!");
+        }
+
+        function addToCartFromDetails() {
+            addToCart();
+            closeProductDetails();
+        }
+
+        // Product Details Functions
+        function openProductDetails(cardElement) {
+            const imgSrc = cardElement.querySelector('img').src;
+            const title = cardElement.querySelector('h3').innerText;
+            const price = cardElement.querySelector('.price').innerText;
+            const rating = cardElement.querySelector('.rating').innerHTML;
+
+            document.getElementById('detail-img').src = imgSrc;
+            document.getElementById('detail-title').innerText = title;
+            document.getElementById('detail-price').innerText = price;
+            document.getElementById('detail-rating').innerHTML = rating;
+
+            document.getElementById('productDetailsModal').style.display = 'flex';
+        }
+
+        function closeProductDetails() {
+            document.getElementById('productDetailsModal').style.display = 'none';
         }
 
         function openAccountModal() { document.getElementById('accountModal').style.display = 'flex'; }
