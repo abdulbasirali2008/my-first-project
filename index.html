@@ -130,11 +130,11 @@
             display: flex;
             gap: 10px;
             overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none;  /* IE 10+ */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         .category-container::-webkit-scrollbar { 
-            display: none; /* Chrome, Safari */
+            display: none;
         }
 
         .cat-btn {
@@ -200,18 +200,6 @@
             margin: 10px 0 5px;
             color: #222;
         }
-        
-        .card .badge {
-            background: #ff007f;
-            color: white;
-            font-size: 11px;
-            padding: 3px 8px;
-            border-radius: 10px;
-            position: absolute;
-            top: 25px;
-            left: 25px;
-            font-weight: bold;
-        }
 
         .price {
             color: #B12704;
@@ -228,9 +216,8 @@
             cursor: pointer;
             font-weight: bold;
             width: 100%;
-            transition: background 0.2s;
         }
-        
+
         .add-btn:active {
             background-color: #f7ca00;
         }
@@ -390,7 +377,6 @@
             z-index: 10;
         }
 
-        /* FULL LIQUID LOGOUT BUTTON */
         .liquid-logout-btn {
             width: 100%;
             padding: 12px 20px;
@@ -406,11 +392,6 @@
             background-size: 400% 400%;
             animation: liquidButtonAnimation 4s ease infinite;
             box-shadow: 0 4px 15px rgba(255, 8, 68, 0.35);
-            transition: all 0.3s ease;
-        }
-
-        .liquid-logout-btn:active {
-            transform: scale(0.97);
         }
 
         @keyframes liquidButtonAnimation {
@@ -446,9 +427,10 @@
             </svg>
         </div>
 
+        <!-- Working Search Bar -->
         <div class="search-bar">
             <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            <input type="text" placeholder="Search">
+            <input type="text" id="searchInput" placeholder="Search electric products, gadgets..." onkeyup="searchProducts()">
         </div>
 
         <div class="header-right">
@@ -459,7 +441,7 @@
     </header>
 
     <div class="banner">
-        🔥 Big Sale! Get 20% OFF on Electronics today!
+        🔥 Mega Sale! Special discounts on Electronics & Appliances today!
     </div>
 
     <!-- Category Filter Bar -->
@@ -475,56 +457,14 @@
     <div class="container">
         <div class="product-grid" id="product-grid">
             
-            <!-- Product 1 -->
+            <!-- Electronics -->
             <div class="card" data-category="electronics">
-                <div class="badge" style="position:relative; top:10px; left: -75px;">New</div>
                 <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
                 <h3>Smart Watch Series 7</h3>
                 <div class="price">৳ 1,500</div>
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
 
-            <!-- Product 2 -->
-            <div class="card" data-category="accessories">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
-                <h3>Sony Wireless Headphone</h3>
-                <div class="price">৳ 2,200</div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="card" data-category="accessories">
-                <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" alt="USB Keyboard">
-                <h3>Mechanical RGB Keyboard</h3>
-                <div class="price">৳ 1,850</div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="card" data-category="appliances">
-                <img src="https://images.unsplash.com/photo-1585149377464-325b3a32fcfc?w=500" alt="Electric Kettle">
-                <h3>Stainless Steel Electric Kettle</h3>
-                <div class="price">৳ 950</div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-            </div>
-
-            <!-- Product 5 (New) -->
-            <div class="card" data-category="accessories">
-                <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500" alt="Power Bank">
-                <h3>Fast Charging Power Bank 10000mAh</h3>
-                <div class="price">৳ 1,200</div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-            </div>
-
-            <!-- Product 6 (New) -->
-            <div class="card" data-category="appliances">
-                <img src="https://images.unsplash.com/photo-1544228784-07d0f98018e6?w=500" alt="Electric Iron">
-                <h3>Philips Dry Iron</h3>
-                <div class="price">৳ 1,150</div>
-                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
-            </div>
-
-            <!-- Product 7 (New) -->
             <div class="card" data-category="electronics">
                 <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500" alt="Bluetooth Speaker">
                 <h3>JBL Portable Bluetooth Speaker</h3>
@@ -532,7 +472,72 @@
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
 
-            <!-- Product 8 (Old) -->
+            <div class="card" data-category="electronics">
+                <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500" alt="Smart TV">
+                <h3>Xiaomi 32" HD Smart LED TV</h3>
+                <div class="price">৳ 16,500</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Accessories -->
+            <div class="card" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
+                <h3>Sony Wireless Headphone</h3>
+                <div class="price">৳ 2,200</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <div class="card" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500" alt="USB Keyboard">
+                <h3>Mechanical RGB Keyboard</h3>
+                <div class="price">৳ 1,850</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <div class="card" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500" alt="Power Bank">
+                <h3>Fast Charging Power Bank 10000mAh</h3>
+                <div class="price">৳ 1,200</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Appliances -->
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1585149377464-325b3a32fcfc?w=500" alt="Electric Kettle">
+                <h3>Stainless Steel Electric Kettle</h3>
+                <div class="price">৳ 950</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1544228784-07d0f98018e6?w=500" alt="Electric Iron">
+                <h3>Philips Dry Iron</h3>
+                <div class="price">৳ 1,150</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1570222094114-d074f7e1e6e5?w=500" alt="Electric Blender">
+                <h3>Miyako Kitchen Blender 3-in-1</h3>
+                <div class="price">৳ 2,400</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=500" alt="Hair Trimmer">
+                <h3>Nova Rechargeable Hair Trimmer</h3>
+                <div class="price">৳ 750</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <div class="card" data-category="appliances">
+                <img src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500" alt="Air Fryer">
+                <h3>Digital Oil-Free Air Fryer</h3>
+                <div class="price">৳ 5,800</div>
+                <button class="add-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+
+            <!-- Shoes -->
             <div class="card" data-category="shoes">
                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
                 <h3>Nike Running Shoes</h3>
@@ -589,13 +594,10 @@
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 <span>Home</span>
             </div>
-            
-            <!-- Category Button now scrolls to Category Filter -->
             <div class="nav-item" id="nav-cat" onclick="setActiveNav('nav-cat'); document.getElementById('category-section').scrollIntoView({behavior: 'smooth', block: 'center'});">
                 <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
                 <span>Categories</span>
             </div>
-
             <div class="nav-item" id="nav-cart" onclick="setActiveNav('nav-cart'); alert('Cart item list coming soon!');">
                 <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
                 <span class="cart-badge" id="cart-count">0</span>
@@ -615,22 +617,35 @@
             checkAutoLogin();
         };
 
+        // Real-time Search Function
+        function searchProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.card');
+
+            cards.forEach(card => {
+                let title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(input)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
         // Category Filter Function
         function filterProducts(category, btnElement) {
-            // Remove 'active' class from all category buttons
             const buttons = document.querySelectorAll('.cat-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add 'active' class to the clicked button
             btnElement.classList.add('active');
 
-            // Filter logic
+            document.getElementById('searchInput').value = ''; // Reset search input on category change
+
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
                 if (category === 'all' || card.getAttribute('data-category') === category) {
-                    card.style.display = 'block'; // Show card
+                    card.style.display = 'block';
                 } else {
-                    card.style.display = 'none';  // Hide card
+                    card.style.display = 'none';
                 }
             });
         }
@@ -638,7 +653,6 @@
         function addToCart() {
             count++;
             document.getElementById('cart-count').innerText = count;
-            // Button feedback effect (optional styling added in CSS)
         }
 
         function setActiveNav(elementId) {
@@ -702,7 +716,6 @@
             if (parsedUser.pass === pass) {
                 localStorage.setItem("session_user", JSON.stringify(parsedUser));
                 applyLoggedInUI(parsedUser.name, parsedUser.phone);
-                // alert("Logged in successfully!"); // You can remove this for a smoother experience
                 closeAccountModal();
             } else {
                 alert("Incorrect Password!");
@@ -747,7 +760,6 @@
             document.getElementById('user-profile').style.display = 'none';
             switchAuthTab('login');
 
-            // alert("Logged out successfully!");
             closeAccountModal();
         }
     </script>
