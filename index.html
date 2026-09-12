@@ -305,12 +305,15 @@
             
             <div id="login-form">
                 <input type="text" id="username-input" placeholder="Enter your name">
+                <!-- মোবাইল নম্বর ইনপুট ঘর -->
+                <input type="tel" id="userphone-input" placeholder="Enter Mobile Number (017XXXXXXXX)">
                 <input type="password" placeholder="Password">
                 <button class="login-submit-btn" onclick="handleLogin()">Login</button>
             </div>
 
             <div id="user-profile" style="display: none;">
                 <p>Welcome, <b id="display-name">User</b>!</p>
+                <p style="font-size: 14px; color: #555;">Phone: <span id="display-phone"></span></p>
                 <button class="login-submit-btn" style="background:#d9534f;" onclick="handleLogout()">Logout</button>
             </div>
         </div>
@@ -354,8 +357,15 @@
         /* লগইন লজিক */
         function handleLogin() {
             const nameInput = document.getElementById('username-input').value;
+            const phoneInput = document.getElementById('userphone-input').value;
+
             if (nameInput.trim() === "") {
                 alert("Please enter a valid name!");
+                return;
+            }
+
+            if (phoneInput.trim() === "") {
+                alert("Please enter your mobile number!");
                 return;
             }
 
@@ -363,6 +373,7 @@
             
             // ইউজার ইন্টারফেস আপডেট
             document.getElementById('display-name').innerText = currentUser;
+            document.getElementById('display-phone').innerText = phoneInput;
             document.getElementById('header-user').innerText = "👤 " + currentUser;
             document.getElementById('nav-account-text').innerText = currentUser;
 
@@ -384,6 +395,7 @@
             document.getElementById('user-profile').style.display = 'none';
             document.getElementById('modal-title').innerText = "Account Login";
             document.getElementById('username-input').value = "";
+            document.getElementById('userphone-input').value = "";
 
             alert("Logged out!");
             closeAccountModal();
