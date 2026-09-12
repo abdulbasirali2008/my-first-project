@@ -286,33 +286,57 @@
         }
 
         /* Product Details Styles */
+        .details-img-container {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+        }
+
         .details-img {
             width: 100%;
             height: 220px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 12px;
+            border: 2px solid #ddd;
+            transition: transform 0.2s;
+        }
+
+        .details-tap-hint {
+            position: absolute;
+            bottom: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 12px;
+            border-radius: 20px;
+            pointer-events: none;
         }
 
         .details-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
             margin-bottom: 12px;
         }
 
         .details-gallery img {
-            width: 100%;
-            height: 90px;
+            width: 55px;
+            height: 55px;
             object-fit: cover;
             border-radius: 6px;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: 0.2s;
+            opacity: 0.6;
+            transition: all 0.3s ease;
         }
 
-        .details-gallery img:hover {
+        .details-gallery img:hover, .details-gallery img.active {
             border-color: #ff5722;
+            opacity: 1;
         }
 
         .details-title {
@@ -654,15 +678,15 @@
         
         <div class="product-grid" id="product-grid">
             
-            <!-- Treko Polo Shirt (৪টি ছবি সহ অনলাইন লিঙ্ক) -->
-            <div class="card" data-category="mens-fashion" onclick="openMultiImageProduct('Treko Men\'s Stylish Collar Polo Shirt', 600, '4.9 (56)', ['https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500', 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500', 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500'])">
-                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500" alt="Treko Polo Shirt">
+            <!-- Treko Polo Shirt (আপনার দেওয়া নতুন ৫টি ছবি সহ) -->
+            <div class="card" data-category="mens-fashion" onclick="openMultiImageProduct('Treko Men\'s Stylish Collar Polo Shirt', 600, '4.9 (56)', ['76310_2.jpg', '76311_2.jpg', '76314_2.jpg', '76313_2.jpg', '76312_2.jpg'])">
+                <img src="76310_2.jpg" alt="Treko Polo Shirt">
                 <h3>Treko Men's Stylish Collar Polo Shirt</h3>
                 <div class="price-row">
                     <span class="price">৳ 600</span>
                     <span class="rating"><span>★</span> 4.9 (56)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Men\'s Stylish Collar Polo Shirt', 600, 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500');">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Men\'s Stylish Collar Polo Shirt', 600, '76310_2.jpg');">Add to Cart</button>
             </div>
 
             <!-- অন্যান্য প্রোডাক্টসমূহ -->
@@ -737,7 +761,14 @@
         <div class="modal-box">
             <span class="close-btn" onclick="closeProductDetails()">&times;</span>
             <div class="modal-body-content" style="text-align: left;">
-                <img id="detail-img" class="details-img" src="" alt="Product Image">
+                
+                <!-- Main Image Container with Tap Hint -->
+                <div class="details-img-container" id="detailsImgContainer" onclick="cycleMainImage()">
+                    <img id="detail-img" class="details-img" src="" alt="Product Image">
+                    <div class="details-tap-hint" id="detailsTapHint">Tap to change</div>
+                </div>
+                
+                <!-- Thumbnails Gallery -->
                 <div id="detail-gallery" class="details-gallery" style="display: none;"></div>
                 
                 <div id="detail-title" class="details-title">Product Name</div>
@@ -846,6 +877,8 @@
     <script>
         let cart = [];
         let currentProductForDetails = null;
+        let currentImagesArray = [];
+        let currentImageIndex = 0;
 
         window.onload = function() { 
             checkAutoLogin(); 
@@ -960,9 +993,12 @@
             const rating = cardElement.querySelector('.rating').innerHTML;
 
             currentProductForDetails = { title, price, img: imgSrc };
+            currentImagesArray = [imgSrc];
+            currentImageIndex = 0;
 
             document.getElementById('detail-img').src = imgSrc;
-            document.getElementById('detail-img').style.display = 'block';
+            document.getElementById('detailsImgContainer').style.cursor = 'default';
+            document.getElementById('detailsTapHint').style.display = 'none';
             document.getElementById('detail-gallery').style.display = 'none';
             document.getElementById('detail-title').innerText = title;
             document.getElementById('detail-price').innerText = priceText;
@@ -972,25 +1008,55 @@
         }
 
         function openMultiImageProduct(title, price, ratingText, imagesArray) {
+            currentImagesArray = imagesArray;
+            currentImageIndex = 0;
             currentProductForDetails = { title, price, img: imagesArray[0] };
 
             document.getElementById('detail-img').src = imagesArray[0];
-            document.getElementById('detail-img').style.display = 'block';
+            document.getElementById('detailsImgContainer').style.cursor = 'pointer';
+            document.getElementById('detailsTapHint').style.display = 'block';
 
             let galleryHtml = '';
-            imagesArray.forEach(imgSrc => {
-                galleryHtml += `<img src="${imgSrc}" onclick="document.getElementById('detail-img').src='${imgSrc}'" alt="Thumbnail">`;
+            imagesArray.forEach((imgSrc, idx) => {
+                let activeClass = idx === 0 ? 'active' : '';
+                galleryHtml += `<img src="${imgSrc}" class="thumb ${activeClass}" onclick="setMainImageIndex(${idx})" alt="Thumbnail">`;
             });
 
             let galleryContainer = document.getElementById('detail-gallery');
             galleryContainer.innerHTML = galleryHtml;
-            galleryContainer.style.display = 'grid';
+            galleryContainer.style.display = 'flex';
 
             document.getElementById('detail-title').innerText = title;
             document.getElementById('detail-price').innerText = '৳ ' + price;
             document.getElementById('detail-rating').innerHTML = `<span>★</span> ${ratingText}`;
 
             document.getElementById('productDetailsModal').style.display = 'flex';
+        }
+
+        function cycleMainImage() {
+            if (currentImagesArray.length <= 1) return;
+            currentImageIndex = (currentImageIndex + 1) % currentImagesArray.length;
+            document.getElementById('detail-img').src = currentImagesArray[currentImageIndex];
+            currentProductForDetails.img = currentImagesArray[currentImageIndex];
+            updateThumbnailsUI();
+        }
+
+        function setMainImageIndex(index) {
+            currentImageIndex = index;
+            document.getElementById('detail-img').src = currentImagesArray[currentImageIndex];
+            currentProductForDetails.img = currentImagesArray[currentImageIndex];
+            updateThumbnailsUI();
+        }
+
+        function updateThumbnailsUI() {
+            const thumbs = document.querySelectorAll("#detail-gallery img");
+            thumbs.forEach((thumb, idx) => {
+                if (idx === currentImageIndex) {
+                    thumb.classList.add("active");
+                } else {
+                    thumb.classList.remove("active");
+                }
+            });
         }
 
         function closeProductDetails() {
