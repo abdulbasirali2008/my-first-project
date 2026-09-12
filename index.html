@@ -17,18 +17,21 @@
         header {
             background-color: #232f3e;
             color: white;
-            padding: 15px 20px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
         }
 
-        header .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff9900;
+        /* লোগোর আকার নিয়ন্ত্রণ */
+        header .logo-container {
+            width: 220px;
+            height: auto;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
         }
 
         .search-bar {
@@ -70,7 +73,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Liquid Wave Effect */
+        /* Liquid Wave Effect for Logged-in Name */
         .liquid-text {
             background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
             background-size: 400% 400%;
@@ -152,7 +155,7 @@
             width: 100%;
         }
 
-        /* Bottom Nav */
+        /* Floating Pill Bottom Navigation Bar */
         .bottom-nav-container {
             position: fixed;
             bottom: 15px;
@@ -220,7 +223,7 @@
             border-radius: 10px;
         }
 
-        /* Auth Modal Styling */
+        /* Modal Styling */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -299,11 +302,41 @@
 <body>
 
     <header>
-        <div class="logo">MY SHOPPING</div>
+        <!-- SVG Vector Logo Integration -->
+        <div class="logo-container" onclick="window.scrollTo(0, 0);">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
+              <defs>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <linearGradient id="bagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FF9900" />
+                  <stop offset="100%" stop-color="#FF5500" />
+                </linearGradient>
+              </defs>
+              <g transform="translate(10, 10)">
+                <path d="M 25 30 A 12 12 0 0 1 49 30" fill="none" stroke="#FF9900" stroke-width="4" stroke-linecap="round"/>
+                <path d="M 12 28 L 62 28 L 56 75 C 56 78 53 80 50 80 L 24 80 C 21 80 18 78 18 75 Z" fill="url(#bagGrad)" filter="url(#glow)"/>
+                <path d="M 28 52 L 35 60 L 48 45" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <text x="90" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#FF9900" letter-spacing="1">
+                SHOPPING
+              </text>
+              <text x="275" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#00D2FF" filter="url(#glow)" letter-spacing="1">
+                BAZAR
+              </text>
+              <text x="92" y="75" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600" fill="#A0A0A0" letter-spacing="3">
+                YOUR TRUSTED ONLINE SHOP
+              </text>
+            </svg>
+        </div>
+
         <div class="search-bar">
             <input type="text" placeholder="Search products...">
             <button>Search</button>
         </div>
+
         <div class="header-right">
             <div class="user-status" id="header-user" onclick="openAccountModal()">
                 👤 Login
@@ -350,20 +383,17 @@
         <div class="modal-box">
             <span class="close-btn" onclick="closeAccountModal()">&times;</span>
             
-            <!-- Tab System -->
             <div class="auth-tabs" id="auth-tabs">
                 <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</div>
                 <div class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</div>
             </div>
 
-            <!-- Login Form -->
             <div id="login-form">
                 <input type="tel" id="login-phone" placeholder="Enter Mobile Number">
                 <input type="password" id="login-pass" placeholder="Password">
                 <button class="login-submit-btn" onclick="handleLogin()">Login</button>
             </div>
 
-            <!-- Sign Up Form -->
             <div id="signup-form" style="display: none;">
                 <input type="text" id="signup-name" placeholder="Full Name">
                 <input type="tel" id="signup-phone" placeholder="Mobile Number">
@@ -371,7 +401,6 @@
                 <button class="login-submit-btn" style="background:#28a745;" onclick="handleSignUp()">Sign Up</button>
             </div>
 
-            <!-- Logged-in Profile View -->
             <div id="user-profile" style="display: none;">
                 <p style="font-size: 18px;">Welcome, <b id="display-name" class="liquid-text">User</b>!</p>
                 <p style="font-size: 14px; color: #555;">Phone: <span id="display-phone"></span></p>
@@ -406,7 +435,6 @@
     <script>
         let count = 0;
 
-        // পেজ লোড হলেই স্বয়ংক্রিয়ভাবে সেভ থাকা অ্যাকাউন্ট চেক করবে
         window.onload = function() {
             checkAutoLogin();
         };
@@ -430,7 +458,6 @@
             document.getElementById('accountModal').style.display = 'none';
         }
 
-        // Tab Switching Logic
         function switchAuthTab(tab) {
             if (tab === 'login') {
                 document.getElementById('tab-login').classList.add('active');
@@ -445,7 +472,6 @@
             }
         }
 
-        // 1. Sign Up Logic
         function handleSignUp() {
             const name = document.getElementById('signup-name').value.trim();
             const phone = document.getElementById('signup-phone').value.trim();
@@ -456,7 +482,6 @@
                 return;
             }
 
-            // Save user to LocalStorage database
             const userData = { name: name, phone: phone, pass: pass };
             localStorage.setItem("user_" + phone, JSON.stringify(userData));
 
@@ -465,7 +490,6 @@
             document.getElementById('login-phone').value = phone;
         }
 
-        // 2. Login Logic
         function handleLogin() {
             const phone = document.getElementById('login-phone').value.trim();
             const pass = document.getElementById('login-pass').value.trim();
@@ -480,7 +504,6 @@
             const parsedUser = JSON.parse(savedUser);
 
             if (parsedUser.pass === pass) {
-                // Save current session so user stays logged in
                 localStorage.setItem("session_user", JSON.stringify(parsedUser));
                 applyLoggedInUI(parsedUser.name, parsedUser.phone);
                 alert("Logged in successfully!");
@@ -490,7 +513,6 @@
             }
         }
 
-        // 3. Auto Login Check on Page Load
         function checkAutoLogin() {
             const activeSession = localStorage.getItem("session_user");
             if (activeSession) {
@@ -499,7 +521,6 @@
             }
         }
 
-        // Update UI after Login
         function applyLoggedInUI(name, phone) {
             const headerUser = document.getElementById('header-user');
             headerUser.innerHTML = `👤 <span class="liquid-text">${name}</span>`;
@@ -517,9 +538,8 @@
             document.getElementById('user-profile').style.display = 'block';
         }
 
-        // 4. Logout Logic
         function handleLogout() {
-            localStorage.removeItem("session_user"); // Clear login session
+            localStorage.removeItem("session_user");
             
             const headerUser = document.getElementById('header-user');
             headerUser.innerHTML = "👤 Login";
