@@ -90,7 +90,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Liquid Wave Effect for Logged-in Name */
+        /* Universal Liquid Text Effect */
         .liquid-text {
             background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
             background-size: 400% 400%;
@@ -240,7 +240,7 @@
             border-radius: 10px;
         }
 
-        /* Modal Styling */
+        /* Modal Overlay & Styling */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -248,7 +248,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.65);
+            backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -256,13 +257,24 @@
 
         .modal-box {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
+            border-radius: 20px;
             width: 90%;
-            max-width: 350px;
+            max-width: 360px;
             text-align: center;
             position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* Upper Light Color Frame Header for Modal */
+        .modal-header-frame {
+            background: linear-gradient(135deg, #e3f2fd, #f3e5f5, #e8f5e9);
+            padding: 22px 15px 15px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .modal-body-content {
+            padding: 20px 25px 25px 25px;
         }
 
         .auth-tabs {
@@ -286,10 +298,10 @@
 
         .modal-box input {
             width: 90%;
-            padding: 10px;
+            padding: 11px;
             margin: 8px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
             outline: none;
         }
 
@@ -297,9 +309,9 @@
             background-color: #ff9900;
             color: white;
             border: none;
-            padding: 10px;
-            width: 95%;
-            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
             font-weight: bold;
             font-size: 16px;
             cursor: pointer;
@@ -308,11 +320,41 @@
 
         .close-btn {
             position: absolute;
-            top: 10px;
+            top: 12px;
             right: 15px;
-            font-size: 20px;
+            font-size: 22px;
             cursor: pointer;
-            color: #888;
+            color: #666;
+            z-index: 10;
+        }
+
+        /* FULL LIQUID LOGOUT BUTTON */
+        .liquid-logout-btn {
+            width: 100%;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            margin-top: 18px;
+            background: linear-gradient(270deg, #ff0844, #ffb199, #f107a3, #ff0844);
+            background-size: 400% 400%;
+            animation: liquidButtonAnimation 4s ease infinite;
+            box-shadow: 0 4px 15px rgba(255, 8, 68, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .liquid-logout-btn:active {
+            transform: scale(0.97);
+        }
+
+        @keyframes liquidButtonAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
 </head>
@@ -349,7 +391,7 @@
             </svg>
         </div>
 
-        <!-- New Pill Style Search Bar -->
+        <!-- Pill Style Search Bar -->
         <div class="search-bar">
             <svg class="search-icon" viewBox="0 0 24 24">
                 <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
@@ -398,33 +440,47 @@
         </div>
     </div>
 
-    <!-- Auth Modal -->
+    <!-- Auth / Profile Modal -->
     <div class="modal-overlay" id="accountModal">
         <div class="modal-box">
             <span class="close-btn" onclick="closeAccountModal()">&times;</span>
             
-            <div class="auth-tabs" id="auth-tabs">
-                <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</div>
-                <div class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</div>
+            <!-- Modal Header with Light Frame Effect -->
+            <div class="modal-header-frame">
+                <h2 style="margin: 0; font-size: 22px;" class="liquid-text">SHOPPING BAZAR</h2>
             </div>
 
-            <div id="login-form">
-                <input type="tel" id="login-phone" placeholder="Enter Mobile Number">
-                <input type="password" id="login-pass" placeholder="Password">
-                <button class="login-submit-btn" onclick="handleLogin()">Login</button>
-            </div>
+            <div class="modal-body-content">
+                <div class="auth-tabs" id="auth-tabs">
+                    <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</div>
+                    <div class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</div>
+                </div>
 
-            <div id="signup-form" style="display: none;">
-                <input type="text" id="signup-name" placeholder="Full Name">
-                <input type="tel" id="signup-phone" placeholder="Mobile Number">
-                <input type="password" id="signup-pass" placeholder="Create Password">
-                <button class="login-submit-btn" style="background:#28a745;" onclick="handleSignUp()">Sign Up</button>
-            </div>
+                <div id="login-form">
+                    <input type="tel" id="login-phone" placeholder="Enter Mobile Number">
+                    <input type="password" id="login-pass" placeholder="Password">
+                    <button class="login-submit-btn" onclick="handleLogin()">Login</button>
+                </div>
 
-            <div id="user-profile" style="display: none;">
-                <p style="font-size: 18px;">Welcome, <b id="display-name" class="liquid-text">User</b>!</p>
-                <p style="font-size: 14px; color: #555;">Phone: <span id="display-phone"></span></p>
-                <button class="login-submit-btn" style="background:#d9534f;" onclick="handleLogout()">Logout</button>
+                <div id="signup-form" style="display: none;">
+                    <input type="text" id="signup-name" placeholder="Full Name">
+                    <input type="tel" id="signup-phone" placeholder="Mobile Number">
+                    <input type="password" id="signup-pass" placeholder="Create Password">
+                    <button class="login-submit-btn" style="background:#28a745;" onclick="handleSignUp()">Sign Up</button>
+                </div>
+
+                <!-- Logged In Welcome Profile Section -->
+                <div id="user-profile" style="display: none;">
+                    <p style="font-size: 20px; font-weight: 600; color: #222; margin-top: 5px;">
+                        Welcome, <span id="display-name" class="liquid-text">User</span>!
+                    </p>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 20px;">
+                        Phone: <span id="display-phone" style="font-weight: 600;"></span>
+                    </p>
+                    
+                    <!-- Liquid Logout Button -->
+                    <button class="liquid-logout-btn" onclick="handleLogout()">Logout</button>
+                </div>
             </div>
         </div>
     </div>
