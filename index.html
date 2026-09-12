@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Online Shop</title>
+    <title>MY SHOPPING</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,6 +67,31 @@
             border-radius: 20px;
             cursor: pointer;
             font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        /* Liquid Wave / Glow Effect for Logged-in Account Name */
+        .liquid-text {
+            background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            animation: liquidGlow 6s ease infinite;
+        }
+
+        .liquid-badge {
+            border: 2px solid transparent;
+            background-image: linear-gradient(#37475a, #37475a), linear-gradient(90deg, #00d2ff, #ff007f);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+
+        @keyframes liquidGlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* অফার ব্যানার */
@@ -232,7 +257,7 @@
 <body>
 
     <header>
-        <div class="logo">My Shop</div>
+        <div class="logo">MY SHOPPING</div>
         
         <!-- সার্চ বার -->
         <div class="search-bar">
@@ -305,14 +330,13 @@
             
             <div id="login-form">
                 <input type="text" id="username-input" placeholder="Enter your name">
-                <!-- মোবাইল নম্বর ইনপুট ঘর -->
                 <input type="tel" id="userphone-input" placeholder="Enter Mobile Number (017XXXXXXXX)">
                 <input type="password" placeholder="Password">
                 <button class="login-submit-btn" onclick="handleLogin()">Login</button>
             </div>
 
             <div id="user-profile" style="display: none;">
-                <p>Welcome, <b id="display-name">User</b>!</p>
+                <p style="font-size: 18px;">Welcome, <b id="display-name" class="liquid-text">User</b>!</p>
                 <p style="font-size: 14px; color: #555;">Phone: <span id="display-phone"></span></p>
                 <button class="login-submit-btn" style="background:#d9534f;" onclick="handleLogout()">Logout</button>
             </div>
@@ -371,11 +395,16 @@
 
             currentUser = nameInput;
             
-            // ইউজার ইন্টারফেস আপডেট
+            // ইউজারের নাম Liquid Glow ইফেক্ট সহ আপডেট
+            const headerUser = document.getElementById('header-user');
+            headerUser.innerHTML = `👤 <span class="liquid-text">${currentUser}</span>`;
+            headerUser.classList.add('liquid-badge');
+
+            const navAccount = document.getElementById('nav-account-text');
+            navAccount.innerHTML = `<span class="liquid-text">${currentUser}</span>`;
+
             document.getElementById('display-name').innerText = currentUser;
             document.getElementById('display-phone').innerText = phoneInput;
-            document.getElementById('header-user').innerText = "👤 " + currentUser;
-            document.getElementById('nav-account-text').innerText = currentUser;
 
             document.getElementById('login-form').style.display = 'none';
             document.getElementById('user-profile').style.display = 'block';
@@ -388,7 +417,11 @@
         /* লগআউট লজিক */
         function handleLogout() {
             currentUser = null;
-            document.getElementById('header-user').innerText = "👤 Login";
+
+            const headerUser = document.getElementById('header-user');
+            headerUser.innerHTML = "👤 Login";
+            headerUser.classList.remove('liquid-badge');
+
             document.getElementById('nav-account-text').innerText = "Account";
 
             document.getElementById('login-form').style.display = 'block';
