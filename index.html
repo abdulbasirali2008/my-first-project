@@ -294,7 +294,6 @@
             margin-bottom: 12px;
         }
 
-        /* Multiple Images Grid inside Details Modal */
         .details-gallery {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -420,7 +419,6 @@
             margin-top: 15px;
         }
 
-        /* Custom Notification Alert Styles */
         .custom-alert-box {
             background: #232f3e;
             border-radius: 18px;
@@ -451,7 +449,6 @@
             transform: scale(0.95);
         }
 
-        /* Auth Styles */
         .auth-tabs {
             display: flex;
             margin-bottom: 12px;
@@ -657,18 +654,18 @@
         
         <div class="product-grid" id="product-grid">
             
-            <!-- নতুন যুক্ত হওয়া Treko Polo Shirt (৪টি ছবি সমet) -->
-            <div class="card" data-category="mens-fashion" onclick="openMultiImageProduct('Treko Men\'s Stylish Collar Polo Shirt', 600, '4.9 (56)', ['76251.jpg', '76248.jpg', '76249.jpg', '76250.jpg'])">
-                <img src="76251.jpg" alt="Treko Polo Shirt">
+            <!-- Treko Polo Shirt (৪টি ছবি সহ অনলাইন লিঙ্ক) -->
+            <div class="card" data-category="mens-fashion" onclick="openMultiImageProduct('Treko Men\'s Stylish Collar Polo Shirt', 600, '4.9 (56)', ['https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500', 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500', 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=500', 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500'])">
+                <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500" alt="Treko Polo Shirt">
                 <h3>Treko Men's Stylish Collar Polo Shirt</h3>
                 <div class="price-row">
                     <span class="price">৳ 600</span>
                     <span class="rating"><span>★</span> 4.9 (56)</span>
                 </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Men\'s Stylish Collar Polo Shirt', 600, '76251.jpg');">Add to Cart</button>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Men\'s Stylish Collar Polo Shirt', 600, 'https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=500');">Add to Cart</button>
             </div>
 
-            <!-- আগের প্রোডাক্টসমূহ -->
+            <!-- অন্যান্য প্রোডাক্টসমূহ -->
             <div class="card" data-category="accessories" onclick="openProductDetails(this)">
                 <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="New Headphone">
                 <h3>Wireless Bass Gaming Headphone</h3>
@@ -741,7 +738,6 @@
             <span class="close-btn" onclick="closeProductDetails()">&times;</span>
             <div class="modal-body-content" style="text-align: left;">
                 <img id="detail-img" class="details-img" src="" alt="Product Image">
-                <!-- Gallery grid for multi-images -->
                 <div id="detail-gallery" class="details-gallery" style="display: none;"></div>
                 
                 <div id="detail-title" class="details-title">Product Name</div>
@@ -975,7 +971,6 @@
             document.getElementById('productDetailsModal').style.display = 'flex';
         }
 
-        // Special function to handle 1 product card with multiple images inside detail modal
         function openMultiImageProduct(title, price, ratingText, imagesArray) {
             currentProductForDetails = { title, price, img: imagesArray[0] };
 
