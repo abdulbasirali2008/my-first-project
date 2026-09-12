@@ -3,1024 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOPPING BAZAR - Home</title>
+    <title>Shopping Bazar</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            padding-bottom: 90px;
-            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
         }
-
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            padding-bottom: 70px;
+        }
         header {
-            background-color: #232f3e;
-            color: white;
-            padding: 10px 15px;
+            background: #fff;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
         }
-
-        header .logo-container {
-            width: 140px;
+        .logo-container {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff5500;
             cursor: pointer;
-            display: flex;
-            align-items: center;
         }
-
         .search-bar {
-            flex-grow: 1;
-            max-width: 400px;
+            flex: 1;
+            margin: 0 15px;
             position: relative;
-            display: flex;
-            align-items: center;
         }
-
         .search-bar input {
             width: 100%;
-            padding: 8px 12px 8px 38px;
-            background-color: rgba(255, 255, 255, 0.08);
-            border: 1.5px solid rgba(255, 255, 255, 0.6);
-            border-radius: 30px;
+            padding: 8px 12px 8px 35px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
             outline: none;
-            color: #ffffff;
             font-size: 14px;
         }
-
-        .search-bar input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
         .search-icon {
             position: absolute;
-            left: 12px;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             width: 16px;
             height: 16px;
-            fill: rgba(255, 255, 255, 0.7);
-            pointer-events: none;
+            fill: #888;
         }
-
         .header-right {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
-
         .user-status {
-            display: none;
+            font-size: 14px;
+            cursor: pointer;
+            color: #555;
+            font-weight: bold;
         }
-
-        .liquid-text {
-            background: linear-gradient(270deg, #ff007f, #00d2ff, #00ff88, #ff007f);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-            animation: liquidGlow 6s ease infinite;
-        }
-
-        @keyframes liquidGlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
         .top-shortcuts {
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            padding: 15px;
             overflow-x: auto;
             background: #fff;
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
             white-space: nowrap;
-            scrollbar-width: none;
         }
-
-        .top-shortcuts::-webkit-scrollbar {
-            display: none;
-        }
-
         .shortcut-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: pointer;
-            min-width: 60px;
             text-decoration: none;
-        }
-
-        .shortcut-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #fff0eb;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .shortcut-icon svg {
-            width: 22px;
-            height: 22px;
-            fill: #ff5722;
-        }
-
-        .shortcut-item span {
-            font-size: 11px;
             color: #333;
-            font-weight: 600;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 10px auto;
-            padding: 0 8px;
-        }
-
-        .section-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #222;
-            margin: 15px 5px 10px 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .reset-filter {
             font-size: 12px;
-            color: #00d2ff;
-            cursor: pointer;
-            display: none;
+            gap: 5px;
         }
-
+        .shortcut-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .product-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 12px;
+            padding: 12px;
         }
-
+        @media(min-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
         .card {
             background: #fff;
-            padding: 8px;
-            border-radius: 6px;
-            border: 1px solid #eaeaea;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
             cursor: pointer;
+            transition: transform 0.2s;
         }
-
+        .card:hover {
+            transform: translateY(-3px);
+        }
         .card img {
             width: 100%;
-            height: 150px;
+            height: 160px;
             object-fit: cover;
-            border-radius: 4px;
         }
-
         .card h3 {
-            font-size: 13px;
-            margin: 8px 0 4px 0;
-            color: #222;
-            height: 34px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 14px;
+            margin: 10px 10px 5px 10px;
+            font-weight: normal;
+            color: #333;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            line-height: 1.2;
-            font-weight: 500;
+            overflow: hidden;
+            height: 36px;
         }
-
         .price-row {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-top: 4px;
-            margin-bottom: 8px;
-        }
-
-        .price {
-            color: #f57224;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .rating {
-            font-size: 11px;
-            color: #757575;
-            display: flex;
             align-items: center;
-            gap: 2px;
+            margin: 0 10px 10px 10px;
         }
-
+        .price {
+            color: #ff5500;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .rating {
+            font-size: 12px;
+            color: #777;
+        }
         .rating span {
-            color: #ff9d00;
+            color: #ffc107;
         }
-
         .add-btn {
-            background-color: #ff5722;
+            background: #ff5500;
             color: white;
             border: none;
-            padding: 7px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
+            padding: 8px;
             width: 100%;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: auto;
+        }
+        .add-btn:active {
+            background: #e04b00;
         }
 
         /* Modal Styles */
         .modal-overlay {
-            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.65);
-            backdrop-filter: blur(4px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
         }
-
         .modal-box {
-            background: white;
-            border-radius: 20px;
+            background: #fff;
             width: 90%;
-            max-width: 360px;
-            text-align: center;
+            max-width: 400px;
+            border-radius: 10px;
+            padding: 20px;
             position: relative;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-            overflow: hidden;
-            max-height: 90vh;
+            max-height: 85vh;
             overflow-y: auto;
         }
-
-        .modal-header-frame {
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5, #e8f5e9);
-            padding: 20px 15px 12px 15px;
-        }
-
-        .modal-body-content {
-            padding: 18px 20px 22px 20px;
-        }
-
         .close-btn {
             position: absolute;
+            right: 15px;
             top: 10px;
-            right: 12px;
-            font-size: 22px;
+            font-size: 24px;
             cursor: pointer;
-            color: #666;
-            z-index: 10;
+            color: #888;
         }
-
-        /* Product Details Styles */
         .details-img {
             width: 100%;
-            height: 220px;
+            height: 250px;
             object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            border-radius: 8px;
         }
-
+        .thumbnail-container {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+        .thumbnail-container img {
+            width: 55px;
+            height: 55px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .thumbnail-container img.active-thumb {
+            border-color: #ff5500;
+        }
         .details-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: #222;
-            margin-bottom: 8px;
-            text-align: left;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 12px 0 5px 0;
         }
-
         .details-price {
             font-size: 20px;
-            color: #f57224;
+            color: #ff5500;
             font-weight: bold;
-            text-align: left;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-
-        .details-rating {
-            font-size: 13px;
-            color: #757575;
-            text-align: left;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .details-rating span {
-            color: #ff9d00;
-        }
-
         .details-desc {
             font-size: 13px;
-            color: #555;
-            text-align: left;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-
-        /* Cart Styles */
-        .cart-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        .cart-item img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-right: 10px;
-        }
-
-        .cart-item-details {
-            flex-grow: 1;
-        }
-
-        .cart-item-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #222;
-            margin-bottom: 4px;
-        }
-
-        .cart-item-price {
-            font-size: 13px;
-            color: #f57224;
-            font-weight: bold;
-        }
-
-        .remove-cart-item {
-            color: #ff3b30;
-            cursor: pointer;
-            font-size: 14px;
-            background: none;
-            border: none;
-            padding: 5px;
-        }
-
-        .cart-total-section {
-            margin-top: 15px;
-            display: flex;
-            justify-content: space-between;
-            font-size: 16px;
-            font-weight: bold;
-            color: #222;
-        }
-
-        .checkout-btn {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        /* Custom Notification Alert Styles */
-        .custom-alert-box {
-            background: #232f3e;
-            border-radius: 18px;
-            width: 85%;
-            max-width: 320px;
-            text-align: center;
-            padding: 25px 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .custom-alert-btn {
-            background: linear-gradient(135deg, #ff5722, #ff9800);
-            color: #ffffff;
-            border: none;
-            padding: 10px 35px;
-            border-radius: 25px;
-            font-weight: 900;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(255,87,34,0.5);
-            transition: all 0.2s ease;
-            letter-spacing: 1px;
-        }
-
-        .custom-alert-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Auth Styles */
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 12px;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 8px;
-            cursor: pointer;
-            font-weight: bold;
             color: #666;
-            font-size: 14px;
-        }
-
-        .auth-tab.active {
-            color: #ff5722;
-            border-bottom: 3px solid #ff5722;
-        }
-
-        .modal-box input {
-            width: 90%;
-            padding: 10px;
-            margin: 6px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .login-submit-btn {
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 8px;
-        }
-
-        .liquid-logout-btn {
-            width: 100%;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 25px;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 15px;
-            background: linear-gradient(270deg, #ff0844, #ffb199, #f107a3, #ff0844);
-            background-size: 400% 400%;
-            animation: liquidButtonAnimation 4s ease infinite;
-        }
-
-        @keyframes liquidButtonAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .bottom-nav-container {
-            position: fixed;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 92%;
-            max-width: 400px;
-            z-index: 999;
-        }
-
-        .bottom-nav {
-            background: rgba(30, 30, 30, 0.9);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 35px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 5px 6px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #a0a0a0;
-            font-size: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            padding: 6px 10px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            position: relative;
-            flex: 1;
-            text-decoration: none;
-        }
-
-        .nav-item svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            margin-bottom: 2px;
-        }
-
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: #3b82f6;
-        }
-
-        .nav-item.active svg {
-            fill: #3b82f6;
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: 3px;
-            right: 12px;
-            background: #ff3b30;
-            color: white;
-            font-size: 9px;
-            font-weight: bold;
-            padding: 1px 5px;
-            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container" onclick="window.location.href='index.html';">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
-              <defs>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-                <linearGradient id="bagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#FF9900" />
-                  <stop offset="100%" stop-color="#FF5500" />
-                </linearGradient>
-              </defs>
-              <g transform="translate(10, 10)">
-                <path d="M 25 30 A 12 12 0 0 1 49 30" fill="none" stroke="#FF9900" stroke-width="4" stroke-linecap="round"/>
-                <path d="M 12 28 L 62 28 L 56 75 C 56 78 53 80 50 80 L 24 80 C 21 80 18 78 18 75 Z" fill="url(#bagGrad)" filter="url(#glow)"/>
-                <path d="M 28 52 L 35 60 L 48 45" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <text x="90" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#FF9900" letter-spacing="1">SHOPPING</text>
-              <text x="275" y="55" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#00D2FF" filter="url(#glow)" letter-spacing="1">BAZAR</text>
-            </svg>
-        </div>
+<header>
+    <div class="logo-container" onclick="window.location.href='index.html';">Shopping Bazar</div>
+    <div class="search-bar">
+        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="searchInput" placeholder="Search in Shopping Bazar...">
+    </div>
+    <div class="header-right">
+        <div class="user-status" id="header-user" onclick="openAccountModal()">👤 Login</div>
+    </div>
+</header>
 
-        <div class="search-bar">
-            <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            <input type="text" id="searchInput" placeholder="Search in Shopping Bazar..." onkeyup="searchProducts()">
-        </div>
+<div class="top-shortcuts">
+    <a class="shortcut-item" href="index.html">
+        <div class="shortcut-icon" style="background: #ffebee;">🛍️</div>
+        <span>All Cat</span>
+    </a>
+    <a class="shortcut-item" href="index.html?cat=mens-fashion">
+        <div class="shortcut-icon" style="background: #e3f2fd;">👕</div>
+        <span>Men's</span>
+    </a>
+</div>
 
-        <div class="header-right">
-            <div class="user-status" id="header-user" onclick="openAccountModal()">
-                👤 Login
-            </div>
+<div class="product-grid" id="product-grid">
+    
+    <!-- নতুন ৪টি ছবি ও ৬০০ টাকা দামের পলো শার্ট প্রোডাক্ট -->
+    <div class="card" data-category="mens-fashion" onclick="openMultiPhotoProduct(this)" 
+         data-images='["76248.jpg", "76249.jpg", "76250.jpg", "76251.jpg"]'
+         data-title="Treko Premium Waffle Polo Shirt" 
+         data-price="600">
+        <img src="76248.jpg" alt="Treko Polo Shirt">
+        <h3>Treko Premium Waffle Polo Shirt</h3>
+        <div class="price-row">
+            <span class="price">৳ ৬০০</span>
+            <span class="rating"><span>★</span> 4.8 (25)</span>
         </div>
-    </header>
-
-    <div class="top-shortcuts">
-        <a class="shortcut-item" href="categories.html">
-            <div class="shortcut-icon" style="background: #ffebee;"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
-            <span>All Cat</span>
-        </a>
-        <a class="shortcut-item" href="index.html?cat=accessories">
-            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></div>
-            <span>Accessories</span>
-        </a>
-        <a class="shortcut-item" href="index.html?cat=womens-fashion">
-            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M12 2C9.24 2 7 4.24 7 7c0 2.21 1.43 4.08 3.42 4.74-.38.52-.61 1.16-.62 1.86v4.4c0 1.1.9 2 2 2s2-.9 2-2v-4.4c-.01-.7-.24-1.34-.62-1.86C15.57 11.08 17 9.21 17 7c0-2.76-2.24-5-5-5z"/></svg></div>
-            <span>Women's</span>
-        </a>
-        <a class="shortcut-item" href="index.html?cat=mens-fashion">
-            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M19.34 5.92L17.5 4l-3.34 3.34L11 4 9.16 5.92 12.08 9H6.92L9.84 5.92 8 4 4.66 7.34 2.82 5.42 1 7.24l3.18 3.18L6.42 13h11.16l2.24-2.58L23 7.24l-1.82-1.82z"/></svg></div>
-            <span>Men's</span>
-        </a>
-        <a class="shortcut-item" href="index.html?cat=appliances">
-            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M18 2h-8C6.13 2 3 5.13 3 9v6c0 3.87 3.13 7 7 7h8c3.87 0 7-3.13 7-7V9c0-3.87-3.13-7-7-7zm-8 18c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></div>
-            <span>Appliances</span>
-        </a>
-        <a class="shortcut-item" href="index.html?cat=sports">
-            <div class="shortcut-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
-            <span>Sports</span>
-        </a>
+        <button class="add-btn" onclick="event.stopPropagation(); addToCart('Treko Premium Waffle Polo Shirt', 600, '76248.jpg');">Add to Cart</button>
     </div>
 
-    <div class="container">
-        <div class="section-title">
-            <span id="section-heading">Just For You</span>
-            <span class="reset-filter" id="resetFilterBtn" onclick="resetCategoryFilter()">Show All</span>
+    <!-- আগের একটি ডেমো প্রোডাক্ট (চাইলে রাখতে পারেন বা পরিবর্তন করতে পারেন) -->
+    <div class="card" data-category="sports" onclick="openSinglePhotoProduct('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500', 'Nike Running Sports Shoes', '৳ ৩,৫০০', 'High quality running shoes for ultimate comfort.')">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Nike Shoes">
+        <h3>Nike Running Sports Shoes</h3>
+        <div class="price-row">
+            <span class="price">৳ ৩,৫০০</span>
+            <span class="rating"><span>★</span> 4.7 (310)</span>
         </div>
-        
-        <div class="product-grid" id="product-grid">
-            <div class="card" data-category="accessories" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart Watch">
-                <h3>Smart Watch Series 7 Bluetooth Calling</h3>
-                <div class="price-row">
-                    <span class="price">৳ 1,500</span>
-                    <span class="rating"><span>★</span> 4.5 (289)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Smart Watch Series 7 Bluetooth Calling', 1500, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="accessories" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500" alt="Bluetooth Speaker">
-                <h3>JBL Portable Wireless Bluetooth Speaker</h3>
-                <div class="price-row">
-                    <span class="price">৳ 2,500</span>
-                    <span class="rating"><span>★</span> 4.8 (112)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('JBL Portable Wireless Bluetooth Speaker', 2500, 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="accessories" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Wireless Headphone">
-                <h3>Sony Wireless Over-Ear Headphone</h3>
-                <div class="price-row">
-                    <span class="price">৳ 2,200</span>
-                    <span class="rating"><span>★</span> 4.6 (95)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Sony Wireless Over-Ear Headphone', 2200, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="womens-fashion" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500" alt="Embroidery Kurti">
-                <h3>Designer Lawn Embroidery Kurti</h3>
-                <div class="price-row">
-                    <span class="price">৳ 1,250</span>
-                    <span class="rating"><span>★</span> 4.3 (74)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Designer Lawn Embroidery Kurti', 1250, 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="womens-fashion" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500" alt="Georgette Saree">
-                <h3>Party Wear Georgette Saree</h3>
-                <div class="price-row">
-                    <span class="price">৳ 2,800</span>
-                    <span class="rating"><span>★</span> 4.7 (150)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Party Wear Georgette Saree', 2800, 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="mens-fashion" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500" alt="Casual Shirt">
-                <h3>Men's Slim Fit Casual Shirt</h3>
-                <div class="price-row">
-                    <span class="price">৳ 950</span>
-                    <span class="rating"><span>★</span> 4.4 (88)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Men\'s Slim Fit Casual Shirt', 950, 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="mens-fashion" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1542272604-787c96355d55?w=500" alt="Jeans Pant">
-                <h3>Classic Blue Denim Jeans for Men</h3>
-                <div class="price-row">
-                    <span class="price">৳ 1,350</span>
-                    <span class="rating"><span>★</span> 4.5 (205)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Classic Blue Denim Jeans for Men', 1350, 'https://images.unsplash.com/photo-1542272604-787c96355d55?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="appliances" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500" alt="Smart TV">
-                <h3>Xiaomi 32" HD Smart LED TV</h3>
-                <div class="price-row">
-                    <span class="price">৳ 16,500</span>
-                    <span class="rating"><span>★</span> 4.9 (43)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Xiaomi 32\" HD Smart LED TV', 16500, 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=500');">Add to Cart</button>
-            </div>
-            <div class="card" data-category="sports" onclick="openProductDetails(this)">
-                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
-                <h3>Nike Running Sports Shoes</h3>
-                <div class="price-row">
-                    <span class="price">৳ 3,500</span>
-                    <span class="rating"><span>★</span> 4.7 (310)</span>
-                </div>
-                <button class="add-btn" onclick="event.stopPropagation(); addToCart('Nike Running Sports Shoes', 3500, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500');">Add to Cart</button>
-            </div>
-        </div>
+        <button class="add-btn" onclick="event.stopPropagation(); addToCart('Nike Running Sports Shoes', 3500, 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500');">Add to Cart</button>
     </div>
 
-    <!-- Product Details Modal -->
-    <div class="modal-overlay" id="productDetailsModal">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeProductDetails()">&times;</span>
-            <div class="modal-body-content" style="text-align: left;">
-                <img id="detail-img" class="details-img" src="" alt="Product Image">
-                <div id="detail-title" class="details-title">Product Name</div>
-                <div id="detail-price" class="details-price">৳ 0</div>
-                <div id="detail-rating" class="details-rating"><span>★</span> 0 (0)</div>
-                <div class="details-desc">
-                    <strong>Description:</strong> 
-                    <p style="margin: 5px 0 15px 0; color: #666;">High quality product available at Shopping Bazar. 100% authentic item with fast home delivery.</p>
-                </div>
-                <button class="add-btn" style="padding: 12px; font-size: 14px;" onclick="addToCartFromDetails()">Add to Cart</button>
+</div>
+
+<!-- Product Details Modal -->
+<div class="modal-overlay" id="productDetailsModal">
+    <div class="modal-box">
+        <span class="close-btn" onclick="closeProductDetails()">&times;</span>
+        <div class="modal-body-content" style="text-align: left;">
+            <img id="detail-img" class="details-img" src="" alt="Product">
+            <div id="thumbnail-container" class="thumbnail-container"></div>
+            <div id="detail-title" class="details-title">Product Name</div>
+            <div id="detail-price" class="details-price">৳ 0</div>
+            <div class="details-desc">
+                <strong>Description:</strong>
+                <p style="margin: 5px 0 15px 0; color: #666;">High quality premium product designed for everyday comfort and style.</p>
             </div>
+            <button id="modal-add-btn" class="add-btn" style="padding: 12px; font-size: 14px;">Add to Cart</button>
         </div>
     </div>
+</div>
 
-    <!-- Cart Modal -->
-    <div class="modal-overlay" id="cartModal">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeCartModal()">&times;</span>
-            <div class="modal-header-frame">
-                <h2 style="margin: 0; font-size: 18px;" class="liquid-text">Your Shopping Cart</h2>
-            </div>
-            <div class="modal-body-content">
-                <div id="cart-items-container" style="max-height: 250px; overflow-y: auto;">
-                    <p style="color: #777; font-size: 13px;">Your cart is empty!</p>
-                </div>
-                <div class="cart-total-section">
-                    <span>Total:</span>
-                    <span id="cart-total-price" style="color: #f57224;">৳ 0</span>
-                </div>
-                <button class="checkout-btn" onclick="alert('Checkout feature coming soon!');">Proceed to Checkout</button>
-            </div>
-        </div>
-    </div>
+<script>
+    function openMultiPhotoProduct(element) {
+        const images = JSON.parse(element.getAttribute('data-images'));
+        const title = element.getAttribute('data-title');
+        const price = '৳ ' + element.getAttribute('data-price');
+        const rawPrice = parseInt(element.getAttribute('data-price'));
 
-    <!-- Custom Liquid Alert Modal -->
-    <div class="modal-overlay" id="customAlertModal">
-        <div class="custom-alert-box">
-            <h3 class="liquid-text" style="font-size: 20px; margin: 0 0 10px 0;">SHOPPING BAZAR</h3>
-            <p class="liquid-text" style="font-size: 14px; margin: 0 0 15px 0;">Added to cart successful</p>
-            <button class="custom-alert-btn" onclick="closeCustomAlert()">OK</button>
-        </div>
-    </div>
+        document.getElementById('detail-img').src = images[0];
+        document.getElementById('detail-title').innerText = title;
+        document.getElementById('detail-price').innerText = price;
 
-    <!-- Auth Modal -->
-    <div class="modal-overlay" id="accountModal">
-        <div class="modal-box">
-            <span class="close-btn" onclick="closeAccountModal()">&times;</span>
-            <div class="modal-header-frame">
-                <h2 style="margin: 0; font-size: 20px;" class="liquid-text">SHOPPING BAZAR</h2>
-            </div>
-            <div class="modal-body-content">
-                <div class="auth-tabs" id="auth-tabs">
-                    <div class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</div>
-                    <div class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">Sign Up</div>
-                </div>
+        const thumbContainer = document.getElementById('thumbnail-container');
+        thumbContainer.innerHTML = '';
 
-                <div id="login-form">
-                    <input type="tel" id="login-phone" placeholder="Enter Mobile Number">
-                    <input type="password" id="login-pass" placeholder="Password">
-                    <button class="login-submit-btn" onclick="handleLogin()">Login</button>
-                </div>
+        images.forEach((imgSrc, index) => {
+            const thumb = document.createElement('img');
+            thumb.src = imgSrc;
+            if(index === 0) thumb.classList.add('active-thumb');
+            
+            thumb.onclick = function() {
+                document.getElementById('detail-img').src = imgSrc;
+                document.querySelectorAll('.thumbnail-container img').forEach(t => t.classList.remove('active-thumb'));
+                thumb.classList.add('active-thumb');
+            };
+            thumbContainer.appendChild(thumb);
+        });
 
-                <div id="signup-form" style="display: none;">
-                    <input type="text" id="signup-name" placeholder="Full Name">
-                    <input type="tel" id="signup-phone" placeholder="Mobile Number">
-                    <input type="password" id="signup-pass" placeholder="Create Password">
-                    <button class="login-submit-btn" style="background:#28a745;" onclick="handleSignUp()">Sign Up</button>
-                </div>
-
-                <div id="user-profile" style="display: none;">
-                    <p style="font-size: 18px; font-weight: 600; color: #222; margin-top: 5px;">
-                        Welcome, <span id="display-name" class="liquid-text">User</span>!
-                    </p>
-                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
-                        Phone: <span id="display-phone" style="font-weight: 600;"></span>
-                    </p>
-                    <button class="liquid-logout-btn" onclick="handleLogout()">Logout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar -->
-    <div class="bottom-nav-container">
-        <div class="bottom-nav">
-            <a class="nav-item active" href="index.html">
-                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                <span>Home</span>
-            </a>
-            <a class="nav-item" href="categories.html">
-                <svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4H4v4zm-6 4h4V4H4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
-                <span>Categories</span>
-            </a>
-            <div class="nav-item" onclick="openCartModal();">
-                <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-                <span class="cart-badge" id="cart-count">0</span>
-                <span>Cart</span>
-            </div>
-            <div class="nav-item" onclick="openAccountModal();">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <span id="nav-account-text">Account</span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let cart = [];
-        let currentProductForDetails = null;
-
-        window.onload = function() { 
-            checkAutoLogin(); 
-            checkUrlCategory();
+        document.getElementById('modal-add-btn').onclick = function() {
+            addToCart(title, rawPrice, images[0]);
+            closeProductDetails();
         };
 
-        function checkUrlCategory() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const cat = urlParams.get('cat');
-            if (cat) {
-                filterByCategory(cat);
-            }
-        }
+        document.getElementById('productDetailsModal').style.display = 'flex';
+    }
 
-        function filterByCategory(category) {
-            let cards = document.querySelectorAll('.card');
-            let heading = document.getElementById('section-heading');
-            let resetBtn = document.getElementById('resetFilterBtn');
+    function openSinglePhotoProduct(img, title, priceStr, desc) {
+        const rawPrice = parseInt(priceStr.replace(/[^0-9]/g, ''));
+        document.getElementById('detail-img').src = img;
+        document.getElementById('thumbnail-container').innerHTML = '';
+        document.getElementById('detail-title').innerText = title;
+        document.getElementById('detail-price').innerText = priceStr;
+        
+        document.getElementById('modal-add-btn').onclick = function() {
+            addToCart(title, rawPrice, img);
+            closeProductDetails();
+        };
 
-            let formattedName = category.charAt(0).toUpperCase() + category.slice(1).replace('-', ' ');
-            heading.innerText = formattedName;
-            resetBtn.style.display = 'block';
+        document.getElementById('productDetailsModal').style.display = 'flex';
+    }
 
-            cards.forEach(card => {
-                let cardCat = card.getAttribute('data-category');
-                card.style.display = (cardCat === category) ? 'flex' : 'none';
-            });
-        }
+    function closeProductDetails() {
+        document.getElementById('productDetailsModal').style.display = 'none';
+    }
 
-        function resetCategoryFilter() {
-            window.location.href = 'index.html';
-        }
+    function addToCart(name, price, img) {
+        alert(name + ' cart-e add kora hoyeche!');
+    }
 
-        function searchProducts() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                let title = card.querySelector('h3').innerText.toLowerCase();
-                card.style.display = title.includes(input) ? 'flex' : 'none';
-            });
-        }
+    function openAccountModal() {
+        alert('Login feature coming soon!');
+    }
+</script>
 
-        function addToCart(title, price, img) {
-            cart.push({ title, price, img });
-            updateCartUI();
-            showCustomAlert();
-        }
-
-        function showCustomAlert() {
-            document.getElementById('customAlertModal').style.display = 'flex';
-        }
-
-        function closeCustomAlert() {
-            document.getElementById('customAlertModal').style.display = 'none';
-        }
-
-        function addToCartFromDetails() {
-            if (currentProductForDetails) {
-                addToCart(currentProductForDetails.title, currentProductForDetails.price, currentProductForDetails.img);
-                closeProductDetails();
-            }
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            let container = document.getElementById('cart-items-container');
-            let totalPriceElem = document.getElementById('cart-total-price');
-            
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="color: #777; font-size: 13px;">Your cart is empty!</p>';
-                totalPriceElem.innerText = '৳ 0';
-                return;
-            }
-
-            let html = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price;
-                html += `
-                    <div class="cart-item">
-                        <img src="${item.img}" alt="Item">
-                        <div class="cart-item-details">
-                            <div class="cart-item-title">${item.title}</div>
-                            <div class="cart-item-price">৳ ${item.price.toLocaleString()}</div>
-                        </div>
-                        <button class="remove-cart-item" onclick="removeFromCart(${index})">✕</button>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            totalPriceElem.innerText = '৳ ' + total.toLocaleString();
-        }
-
-        function openCartModal() {
-            document.getElementById('cartModal').style.display = 'flex';
-        }
-
-        function closeCartModal() {
-            document.getElementById('cartModal').style.display = 'none';
-        }
-
-        // Product Details Functions
-        function openProductDetails(cardElement) {
-            const imgSrc = cardElement.querySelector('img').src;
-            const title = cardElement.querySelector('h3').innerText;
-            const priceText = cardElement.querySelector('.price').innerText;
-            const price = parseInt(priceText.replace('৳', '').replace(',', '').trim());
-            const rating = cardElement.querySelector('.rating').innerHTML;
-
-            currentProductForDetails = { title, price, img: imgSrc };
-
-            document.getElementById('detail-img').src = imgSrc;
-            document.getElementById('detail-title').innerText = title;
-            document.getElementById('detail-price').innerText = priceText;
-            document.getElementById('detail-rating').innerHTML = rating;
-
-            document.getElementById('productDetailsModal').style.display = 'flex';
-        }
-
-        function closeProductDetails() {
-            document.getElementById('productDetailsModal').style.display = 'none';
-        }
-
-        function openAccountModal() { document.getElementById('accountModal').style.display = 'flex'; }
-        function closeAccountModal() { document.getElementById('accountModal').style.display = 'none'; }
-
-        function switchAuthTab(tab) {
-            if (tab === 'login') {
-                document.getElementById('tab-login').classList.add('active');
-                document.getElementById('tab-signup').classList.remove('active');
-                document.getElementById('login-form').style.display = 'block';
-                document.getElementById('signup-form').style.display = 'none';
-            } else {
-                document.getElementById('tab-signup').classList.add('active');
-                document.getElementById('tab-login').classList.remove('active');
-                document.getElementById('signup-form').style.display = 'block';
-                document.getElementById('login-form').style.display = 'none';
-            }
-        }
-
-        function handleSignUp() {
-            const name = document.getElementById('signup-name').value.trim();
-            const phone = document.getElementById('signup-phone').value.trim();
-            const pass = document.getElementById('signup-pass').value.trim();
-            if (!name || !phone || !pass) { alert("Please fill in all fields!"); return; }
-            localStorage.setItem("user_" + phone, JSON.stringify({ name, phone, pass }));
-            alert("Account created successfully! Now please login.");
-            switchAuthTab('login');
-            document.getElementById('login-phone').value = phone;
-        }
-
-        function handleLogin() {
-            const phone = document.getElementById('login-phone').value.trim();
-            const pass = document.getElementById('login-pass').value.trim();
-            const savedUser = localStorage.getItem("user_" + phone);
-            if (!savedUser) { alert("No account found! Please Sign Up first."); return; }
-            const parsedUser = JSON.parse(savedUser);
-            if (parsedUser.pass === pass) {
-                localStorage.setItem("session_user", JSON.stringify(parsedUser));
-                applyLoggedInUI(parsedUser.name, parsedUser.phone);
-                closeAccountModal();
-            } else { alert("Incorrect Password!"); }
-        }
-
-        function checkAutoLogin() {
-            const activeSession = localStorage.getItem("session_user");
-            if (activeSession) {
-                const user = JSON.parse(activeSession);
-                applyLoggedInUI(user.name, user.phone);
-            }
-        }
-
-        function applyLoggedInUI(name, phone) {
-            document.getElementById('nav-account-text').innerHTML = `<span class="liquid-text">${name}</span>`;
-            document.getElementById('display-name').innerText = name;
-            document.getElementById('display-phone').innerText = phone;
-            document.getElementById('auth-tabs').style.display = 'none';
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('signup-form').style.display = 'none';
-            document.getElementById('user-profile').style.display = 'block';
-        }
-
-        function handleLogout() {
-            localStorage.removeItem("session_user");
-            location.reload();
-        }
-    </script>
 </body>
 </html>
