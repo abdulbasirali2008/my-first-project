@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            padding-bottom: 70px; /* বটম বারের জন্য নিচে ফাঁকা জায়গা */
             background-color: #f4f4f4;
         }
 
@@ -124,6 +125,39 @@
         .add-btn:hover {
             background-color: #f7ca00;
         }
+
+        /* বটম নেভিগেশন বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            border-top: 1px solid #ddd;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #555;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            color: #ff9900;
+        }
     </style>
 </head>
 <body>
@@ -184,6 +218,22 @@
                 <button class="add-btn" onclick="addToCart()">Add to Cart</button>
             </div>
 
+        </div>
+    </div>
+
+    <!-- নিচে নতুন যোগ করা বাটনসমূহ -->
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="alert('You are on Home page')">
+            <span>🏠</span>
+            Home
+        </div>
+        <div class="nav-item" onclick="alert('Categories section coming soon!')">
+            <span>📂</span>
+            Categories
+        </div>
+        <div class="nav-item" onclick="alert('Account settings coming soon!')">
+            <span>👤</span>
+            Account
         </div>
     </div>
 
